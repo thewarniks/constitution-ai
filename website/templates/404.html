@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Page not found – {{ site.name }}{% endblock %}
+
+{% block content %}
+<section class="section-404 flat-spacing">
+    <div class="container text-center">
+        <h1 class="title fw-semibold text-dispaly-1 effectFade fadeZoom">404 Page Not Found</h1>
+        <p class="desc text-body-1 text-white-64 effectFade fadeZoom">
+            Sorry, we couldn't find the page you were looking for. <br>
+            Try the homepage, or ask the AI your question directly.
+        </p>
+        <div class="d-flex gap-12 justify-content-center flex-wrap effectFade fadeZoom">
+            <a href="/" class="tf-btn"><span class="text-body-2 fw-semibold">HOME PAGE</span></a>
+            <a href="/chat" class="tf-btn-2"><span class="text-body-2 fw-semibold">ASK THE AI</span></a>
+        </div>
+    </div>
+</section>
+{% endblock %}

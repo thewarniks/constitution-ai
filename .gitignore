@@ -1,0 +1,15 @@
+# Secrets: API keys live only in .env
+.env
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Private data: saved chats, uploaded datasets, contact-form messages
+history/
+datasets/
+contact_messages.jsonl
+
+# Original Aigocy template source (a paid ThemeForest item; not redistributed here)
+aigocy/

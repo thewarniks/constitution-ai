@@ -1,0 +1,387 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+{% block body_class %}counter-scroll{% endblock %}
+
+{% block content %}
+<!-- Hero Banner -->
+<div class="section-hero">
+    <div class="hero-image"></div>
+    <div class="container">
+        <div class="content-wrap text-center">
+            <div class="sub fw-semibold effectFade fadeUp">
+                <img src="/assets/images/logo/mark.svg?v={{ v }}" alt="" width="20" height="20">
+                AI-Powered Legal Help
+            </div>
+            <h1 class="title text-display-2 effectFade fadeRotateX">
+                <span class="title1 fw-semibold text-gradient-1">Your AI Legal Assistant</span>
+                <br>
+                <span class="title2 d-flex gap-20 justify-content-center flex-wrap">
+                    <span class="fw-semibold text-gradient-1">on Demand</span>
+                    <span class="title-icon">
+                        <span class="box"></span>
+                        <span class="title-icon-wrap">
+                            <img class="img-1 img-transform-3" src="/assets/images/legal/hero-a-scale.svg?v={{ v }}" alt="" width="133" height="80">
+                            <img class="img-2 img-transform-3" src="/assets/images/legal/hero-b-gavel.svg?v={{ v }}" alt="" width="115" height="115">
+                            <img class="img-3 img-transform-3" src="/assets/images/legal/hero-c-doc.svg?v={{ v }}" alt="" width="105" height="105">
+                        </span>
+                    </span>
+                </span>
+            </h1>
+            <p class="text effectFade fadeUp">
+                Explain your problem in your own words and get the relevant law, your options and clear next steps, <br class="d-none d-lg-inline"> from tenancy and consumer disputes to FIRs, family matters and unpaid salary.
+            </p>
+            <div class="bot-btns effectFade fadeRotateX">
+                <a href="/chat" class="tf-btn">Ask the AI</a>
+                <a href="/practice-areas" class="tf-btn-2">Explore Practice Areas</a>
+            </div>
+        </div>
+    </div>
+    <a href="#about" class="scroll-more">
+        <span class="fw-semibold link1">Scroll for more</span>
+        <i class="icon icon-long-arrow-alt-down-solid"></i>
+    </a>
+</div>
+<!-- /Hero Banner -->
+
+<!-- section-about-us -->
+<div class="section-about-us flat-spacing" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="heading-section">
+                    <div class="heading-sub fw-semibold effectFade fadeUp">About</div>
+                    <div class="heading-title text-gradient-2 effectFade fadeRotateX">Legal Help, <br> in Plain Words</div>
+                </div>
+            </div>
+            <div class="col-xxl-7 col-lg-6 lg-mb-24">
+                <div class="col-left">
+                    <div class="position-relative z-5">
+                        <div class="sub text-white">
+                            <span class="dot"></span>
+                            Available 24/7
+                        </div>
+                        <h5 class="title fw-semibold text-white">Built for <span class="text-brand">everyone in India</span></h5>
+                        <a href="/chat" class="tf-btn">Ask a Question</a>
+                    </div>
+                    <img class="effectFade fadeRotateX" src="/assets/images/legal/earth.svg?v={{ v }}" alt="">
+                </div>
+            </div>
+            <div class="col-xxl-5 col-lg-6">
+                <div class="review-box mb-24">
+                    <div class="desc fw-semibold text-body-1">{{ languages|length }} answer languages. Ask in English, Hindi, Bengali, Marathi, Tamil, Telugu and more, and get answers in the same language.</div>
+                    <div class="d-flex justify-content-between flex-wrap align-items-end gap-12">
+                        <div class="d-flex flex-wrap gap-8 language-chips">
+                            {% for l in languages[:5] %}<span class="tags-item fw-semibold">{{ l }}</span>{% endfor %}
+                        </div>
+                        <div class="counter text-neutral-200" title="{{ languages|length }} answer languages">
+                            <span class="number" data-speed="1500" data-to="{{ languages|length }}" data-inviewport="yes">1</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-quotes effectFade fadeRotateX">
+                    <div class="image">
+                        <img src="/assets/images/legal/quote.svg?v={{ v }}" alt="">
+                    </div>
+                    <div class="content">
+                        <div class="icon mb-8">
+                            <svg width="23" height="20" viewBox="0 0 23 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M12.9375 20V10.3597C12.9375 7.72182 13.824 5.51559 15.5969 3.74101C17.4177 1.91847 19.8854 0.671463 23 0V6.40288C21.8021 6.78657 21.0115 7.26619 20.6281 7.84173C20.2448 8.3693 20.0292 9.04077 19.9813 9.85612H23V20H12.9375ZM0 20V10.3597C0 7.72182 0.886459 5.51559 2.65938 3.74101C4.48021 1.91847 6.94792 0.671463 10.0625 0V6.40288C8.9125 6.78657 8.12187 7.26619 7.69062 7.84173C7.30729 8.3693 7.09167 9.04077 7.04375 9.85612H10.0625V20H0Z" fill="#E4E4E7"/>
+                            </svg>
+                        </div>
+                        <div class="text-body-1 fw-semibold desc">The legal system should promote justice on a basis of equal opportunity, with free legal aid for all.</div>
+                        <div class="cite">
+                            <div class="name text-body-3 fw-semibold">Article 39A</div>
+                            <div class="line"></div>
+                            <div class="sub text-body-3">Constitution of India (paraphrased)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /section-about-us -->
+
+{{ m.partner_strip(providers) }}
+
+<div class="box-white">
+    <!-- section-services: practice areas -->
+    <div id="services" class="section-services flat-spacing">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-xxl-4 col-lg-6">
+                    <div class="d-flex flex-column justify-content-between h-100">
+                        <div class="col-left">
+                            <div class="heading-section mb-48">
+                                <div class="heading-sub fw-semibold effectFade fadeUp">Practice Areas</div>
+                                <div class="heading-title text-gradient-3 effectFade fadeRotateX">Everyday <br> Legal Help</div>
+                            </div>
+                            <p class="effectFade fadeUp">From a deposit your landlord won't return to a police station that won't register your complaint, it explains the law and walks you through what to do next.</p>
+                            <a href="/practice-areas" class="tf-btn mt-4 effectFade fadeUp">All practice areas</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-6 col-lg-6">
+                    <div class="accordion-faq_list" id="accordion-services">
+                        {% for a in areas[:4] %}
+                        <div class="accordion-faq_item effectFade fadeUp" role="presentation">
+                            <div class="accordion-action services-image-btn {% if loop.first %}active-img{% else %}collapsed{% endif %}" data-img="/assets/images/legal/{{ a.image }}?v={{ v }}"
+                                data-bs-target="#area-{{ loop.index }}" role="button" data-bs-toggle="collapse"
+                                aria-controls="area-{{ loop.index }}" aria-expanded="{{ 'true' if loop.first else 'false' }}">
+                                <div class="accordion-title">
+                                    {{ a.title }}
+                                    <div class="text-body-1 num">(0{{ loop.index }})</div>
+                                </div>
+                            </div>
+                            <div id="area-{{ loop.index }}" class="collapse {% if loop.first %}show{% endif %}" data-bs-parent="#accordion-services">
+                                <div class="accordion-content">
+                                    <div class="text-body-3 text-neutral-300 text">{{ a.short }}</div>
+                                    <div class="list-tags">
+                                        {% for t in a.tags %}<a href="/practice-areas/{{ a.slug }}" class="tags-item fw-semibold">{{ t }}</a>{% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="services-image effectFade fadeUp">
+                    <img src="/assets/images/legal/{{ areas[0].image }}?v={{ v }}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /section-services -->
+
+    <!-- section-featured-works: use cases -->
+    <div id="works" class="section-featured-works flat-spacing pt-0">
+        <div class="container">
+            <div class="heading-section mb-0">
+                <div class="heading-sub fw-semibold mx-auto effectFade fadeUp">Use Cases</div>
+            </div>
+            <div class="featured-works-list position-relative">
+                {% for c in cases[:4] %}
+                <div class="">
+                    <div class="featured-works-item {% if loop.first %}effectFade fadeUp no-div{% endif %}">
+                        <div class="image main-mouse-hover">
+                            <img src="/assets/images/legal/{{ c.image }}?v={{ v }}" alt="">
+                            <a href="/use-cases/{{ c.slug }}" class="tf-mouse view-project h6">
+                                View Example
+                                <i class="icon icon-arrow-top-right"></i>
+                            </a>
+                        </div>
+                        <div class="content">
+                            <div class="pagi-dot">
+                                {% for i in range(4) %}<span class="{% if i == loop.index0 %}active{% endif %}"></span>{% endfor %}
+                            </div>
+                            <div class="bot">
+                                <h4 class="heading fw-semibold"><a href="/use-cases/{{ c.slug }}" class="link1">{{ c.title }}</a></h4>
+                                <div class="grid-text">
+                                    <div class="item">
+                                        <div class="title text-secondary">SITUATION</div>
+                                        <div class="text-body-3 fw-semibold">{{ c.summary }}</div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="title text-secondary">HOW IT HELPS</div>
+                                        <div class="fw-semibold text-body-3">{{ c.helps[0] }}</div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="title text-secondary">AREA</div>
+                                        <div class="fw-semibold text-body-3">{{ area_titles[c.area] }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- /section-featured-works -->
+
+    {{ m.process(pad_top=false) }}
+
+    <!-- section-benefits -->
+    <div class="section-benefits flat-spacing pt-0">
+        <div class="container">
+            <div class="heading-section center mb-70">
+                <div class="heading-sub fw-semibold effectFade fadeUp">Benefits</div>
+                <div class="heading-title text-gradient-3 effectFade fadeRotateX">Why Use It</div>
+            </div>
+            <div class="row mb-24">
+                <div class="col-lg-7">
+                    <div class="benefits-box benefits-progress">
+                        <div class="benefits-progress-inner">
+                            {% for pct, icon, label in [(95, "icon-comments-solid", "Clarity"), (100, "icon-tachometer-alt-solid", "Speed"), (80, "icon-shield-alt-solid", "Privacy"), (90, "icon-coins-solid", "Cost")] %}
+                            <div class="benefits-progress-item">
+                                <div class="progress-line" data-progress="{{ pct }}"></div>
+                                <div class="progress-text fw-semibold"><i class="icon {{ icon }}"></i> {{ label }}</div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="content">
+                            <h6 class="fw-semibold title">Clear Over Clever</h6>
+                            <p class="text text-secondary">Answers use plain words, short steps and headings, so you know what the law says and what to do next.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="benefits-box benefits-step effectFade fadeUp">
+                        <div class="benefits-step-inner">
+                            <div class="line-step"></div>
+                            <div class="step-item"><i class="icon icon-check-solid"></i></div>
+                            <div class="step-item"><i class="icon icon-check-solid"></i></div>
+                            <div class="step-item"><i class="icon icon-check-solid"></i></div>
+                        </div>
+                        <div class="content">
+                            <h6 class="fw-semibold title">Grounded in Current Law</h6>
+                            <p class="text text-secondary">Knows India's 2024 criminal codes (BNS, BNSS, BSA), and can quote the Acts you upload as reference datasets.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="benefits-box benefits-secure">
+                        <div class="benefits-secure-inner text-center">
+                            <img class="benefit-tile" src="/assets/images/legal/tile-lock.svg?v={{ v }}" alt="">
+                        </div>
+                        <div class="content">
+                            <h6 class="fw-semibold title">Private by Design</h6>
+                            <p class="text text-secondary">Chats stay in your browser and API keys stay on the server. Only your question goes to the AI provider that answers it.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="benefits-box benefits-design">
+                        <div class="benefits-design-inner">
+                            <img class="item-img-1 benefit-tile" src="/assets/images/legal/tile-chat.svg?v={{ v }}" alt="">
+                            <img class="item-img-2 rightleft benefit-tile-sm" src="/assets/images/legal/tile-light-doc.svg?v={{ v }}" alt="">
+                            <img class="item-img-3 updown benefit-tile-sm" src="/assets/images/legal/tile-globe.svg?v={{ v }}" alt="">
+                        </div>
+                        <div class="content">
+                            <h6 class="fw-semibold title">Designed for Real People</h6>
+                            <p class="text text-secondary">Attach a photo of a notice, speak your question, or pick a topic. No legal jargon needed to get started.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /section-benefits -->
+
+    <!-- section-features -->
+    <div class="section-features flat-spacing pt-0">
+        <div class="container">
+            <div class="heading-section center mb-64">
+                <div class="heading-sub fw-semibold effectFade fadeUp">Features</div>
+                <div class="heading-title text-gradient-3 effectFade fadeRotateX">Everything in One Place</div>
+            </div>
+        </div>
+        <div class="position-relative">
+            <div class="container z-5">
+                <div class="features-wrap justify-content-between">
+                    <div class="features-col col-left lg-mb-24">
+                        <div class="features-item effectFade fadeUp">
+                            <i class="icon icon-comments-solid"></i>
+                            <h6 class="title fw-semibold">Plain-Language Answers</h6>
+                            <p class="text-secondary">The relevant law, your options and the usual procedure, explained step by step without jargon.</p>
+                        </div>
+                        <div class="features-item effectFade fadeUp">
+                            <i class="icon icon-clipboard-check-solid"></i>
+                            <h6 class="title fw-semibold">Deadlines Flagged</h6>
+                            <p class="text-secondary">Limitation periods, notice windows and appeal deadlines are called out, so you don't miss them.</p>
+                        </div>
+                        <div class="features-item effectFade fadeUp">
+                            <i class="icon icon-book-solid"></i>
+                            <h6 class="title fw-semibold">Your Own Legal Library</h6>
+                            <p class="text-secondary">Upload Acts, judgments or notes as datasets; answers quote the most relevant passages with citations.</p>
+                        </div>
+                    </div>
+                    <div class="features-center flex-shrink">
+                        <img src="/assets/images/logo/mark-white.svg?v={{ v }}" alt="">
+                    </div>
+                    <div class="features-col col-right">
+                        <div class="features-item effectFade fadeUp" data-delay="0.1">
+                            <i class="icon icon-paperclip-solid"></i>
+                            <h6 class="title fw-semibold">Reads Your Documents</h6>
+                            <p class="text-secondary">Attach a notice, contract, FIR or order as a PDF, Word file or photo and ask what it means for you.</p>
+                        </div>
+                        <div class="features-item effectFade fadeUp" data-delay="0.1">
+                            <i class="icon icon-envelope-solid"></i>
+                            <h6 class="title fw-semibold">Drafts You Can Use</h6>
+                            <p class="text-secondary">Legal notices, complaints and replies, drafted for you to review with a lawyer before sending.</p>
+                        </div>
+                        <div class="features-item effectFade fadeUp" data-delay="0.1">
+                            <i class="icon icon-plug-solid"></i>
+                            <h6 class="title fw-semibold">Choose Your AI Engine</h6>
+                            <p class="text-secondary">Start with a free provider like Groq or Gemini, or switch to Claude, OpenAI or DeepSeek.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="side-line-main d-none d-lg-block wow fadeIn">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 mx-auto">
+                            <div class="side-line-wrap">
+                                <div class="link-break-line left">
+                                    <div class="link-break-line">
+                                        <span class="item top"></span>
+                                        <span class="item bottom"></span>
+                                    </div>
+                                </div>
+                                <div class="link-break-center">
+                                    <span class="simu-electric left"></span>
+                                    <span class="simu-electric right"></span>
+                                </div>
+                                <div class="link-break-line right">
+                                    <span class="item top"></span>
+                                    <span class="item bottom"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /section-features -->
+</div>
+
+<!-- section-tools -->
+<div class="section-tools flat-spacing">
+    {% for icon in ["scale", "gavel", "doc", "globe", "lock", "chat"] %}
+    <img class="img-{{ loop.index }} img-grow-{{ loop.index }} tool-tile" src="/assets/images/legal/tile-{% if loop.index is even %}light-{% endif %}{{ icon }}.svg" alt="">
+    {% endfor %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-5 col-md-8 text-center">
+                <div class="heading-section center mb-48">
+                    <div class="heading-sub fw-semibold effectFade fadeUp">AI Engines</div>
+                    <div class="heading-title text-gradient-3 effectFade fadeRotateX">Powered by the AI model you choose</div>
+                </div>
+                <div class="text effectFade fadeUp">
+                    Answers come from leading language models, guided by careful legal instructions and, if you add them, your own reference documents.
+                </div>
+                <a href="/chat" class="tf-btn effectFade fadeRotateX">Get Started</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /section-tools -->
+
+<div class="box-black">
+    <div class="light-box"></div>
+    <img class="light-top" src="/assets/images/legal/light-top.svg?v={{ v }}" alt="">
+    <img class="light-bot" src="/assets/images/legal/light-bot.svg?v={{ v }}" alt="">
+    {{ m.statistic(stats, "Six practice areas, ten languages and a choice of AI engines, so help is there whenever a legal question comes up.") }}
+    <div class="pt-5"></div>
+    {{ m.questions_people_ask(areas, cases) }}
+</div>
+
+{{ m.pricing() }}
+{{ m.faq_section(faqs) }}
+{{ m.contact_section() }}
+{% endblock %}

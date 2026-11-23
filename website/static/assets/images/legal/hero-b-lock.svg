@@ -1,0 +1,10 @@
+<svg width="115" height="115" viewBox="0 0 115 115" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="tdark" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#45474d"/><stop offset="1" stop-color="#151517"/></linearGradient>
+<linearGradient id="tred" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FF7A5C"/><stop offset=".6" stop-color="#FD3A25"/><stop offset="1" stop-color="#EA2B16"/></linearGradient>
+<linearGradient id="tlight" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffffff"/><stop offset="1" stop-color="#e4e4e7"/></linearGradient>
+<linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ffffff" stop-opacity=".28"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+<filter id="shadow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="10" stdDeviation="9" flood-color="#000" flood-opacity=".28"/></filter>
+</defs>
+<g transform="rotate(10 57.5 53.5)" filter="url(#shadow)"><rect x="31.5" y="27.5" width="52" height="52" rx="13.5" fill="url(#tdark)"/><rect x="31.5" y="27.5" width="52" height="26.0" rx="13.5" fill="url(#gloss)"/><rect x="32.2" y="28.2" width="50.5" height="50.5" rx="13.5" stroke="#ffffff" stroke-opacity=".25" stroke-width="1.5"/><g transform="translate(43.5 39.5) scale(1.1700)" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 11h11a1.5 1.5 0 0 1 1.5 1.5v7a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 19.5v-7A1.5 1.5 0 0 1 6.5 11zM8.5 11V7.5a3.5 3.5 0 0 1 7 0V11"/></g></g>
+</svg>

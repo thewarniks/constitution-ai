@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+{% block title %}{{ case.title }} – {{ site.name }}{% endblock %}
+{% block description %}{{ case.summary }}{% endblock %}
+
+{% block content %}
+{{ m.page_hero(case.title, "Example", case.summary, ("doc", "chat", "scale")) }}
+
+<div id="works" class="section-work-single flat-spacing pt-0">
+    <div class="container">
+        <div class="row mb-32">
+            <div class="col-12">
+                <div class="wrap-image mb-60 effectFade fadeZoom">
+                    <img src="/assets/images/legal/{{ case.image }}?v={{ v }}" alt="">
+                </div>
+                <h2 class="heading fw-semibold mb-32 effectFade fadeUp">The situation</h2>
+                <p class="text-secondary effectFade fadeUp">{{ case.situation }}</p>
+                <p class="text-secondary effectFade fadeUp"><em>This is an example scenario to show how the assistant helps; names and details are illustrative.</em></p>
+            </div>
+        </div>
+        <div class="row mb-60">
+            <div class="col-md-8 md-mb-24">
+                <div class="text-body-1 fw-semibold text-secondary mb-15 effectFade fadeUp">TOPICS</div>
+                <div class="list-tags effectFade fadeUp">
+                    {% for t in area.tags %}<span class="tags-item fw-semibold">{{ t }}</span>{% endfor %}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-body-1 fw-semibold text-secondary mb-15 effectFade fadeUp" data-delay="0.1">PRACTICE AREA</div>
+                <div class="list-tags effectFade fadeUp" data-delay="0.1">
+                    <a href="/practice-areas/{{ area.slug }}" class="tags-item fw-semibold">{{ area.title }}</a>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-60">
+            <div class="col-12">
+                <h2 class="heading fw-semibold mb-20 effectFade fadeUp">How Constitution Ai helps</h2>
+                <ul class="list-text type-check">
+                    {% for h in case.helps %}
+                    <li class="effectFade fadeUp"><i class="icon icon-check-solid"></i> {{ h }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="ask-panel effectFade fadeUp">
+                    <div>
+                        <div class="text-secondary fw-semibold mb-8">TRY IT WITH THIS QUESTION</div>
+                        <h5 class="fw-semibold mb-0">“{{ case.question }}”</h5>
+                    </div>
+                    <a href="/chat?q={{ case.question|urlencode }}" class="tf-btn flex-shrink-0">Ask the AI</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-featured-works flat-spacing pt-0">
+    <div class="container">
+        <div class="heading-section center mb-48">
+            <div class="heading-sub fw-semibold mx-auto effectFade fadeUp">More examples</div>
+        </div>
+        <div class="tf-grid-layout sm-col-2 xl-col-3">
+            {% for c in others %}
+            <div class="article-blog hover-img effectFade fadeUp no-div" data-delay="{{ loop.index0 / 10 }}">
+                <a href="/use-cases/{{ c.slug }}" class="blog-image img-style">
+                    <img loading="lazy" width="426" height="246" src="/assets/images/legal/{{ c.image }}?v={{ v }}" alt="">
+                </a>
+                <div class="blog-content">
+                    <div class="infor">
+                        <p class="infor_sub text-secondary">{{ area_titles[c.area] }}</p>
+                        <h6 class="fw-semibold"><a href="/use-cases/{{ c.slug }}" class="link1 infor_name">{{ c.title }}</a></h6>
+                    </div>
+                    <a href="/use-cases/{{ c.slug }}" class="tf-btn-2">View <i class="icon icon-arrow-top-right"></i></a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{
+    "chatbotStore": {
+        "apiKey": "",
+        "url": "https://api-cdn.thehive.ai",
+        "path": "/api/v3/chat/completions",
+        "model": "deepseek-ai/deepseek-v4.1-flash",
+        "max_tokens_type": "max_completion_tokens",
+        "max_tokens_value": ""
+    },
+    "defaultChoiceStore": {
+        "model": [
+            "deepseek-ai/deepseek-v4.1-flash"
+        ]
+    },
+    "title": "Hive (DeepSeek V4.1 Flash)",
+    "headers": {
+        "Accept": "text/event-stream"
+    }
+}

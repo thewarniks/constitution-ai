@@ -1,0 +1,17 @@
+{
+    "chatbotStore": {
+        "apiKey": "",
+        "url": "https://generativelanguage.googleapis.com",
+        "path": "/v1beta/openai/chat/completions",
+        "model": "gemini-3.8-flash",
+        "max_tokens_value": ""
+    },
+    "defaultChoiceStore": {
+        "model": [
+            "gemini-3.8-flash"
+        ]
+    },
+    "title": "Google Gemini (free tier)",
+    "modelsUrl": "https://generativelanguage.googleapis.com/v1beta/openai/models",
+    "modelsExclude": ["embedding", "image", "imagen", "veo", "tts", "audio", "live", "aqa"]
+}

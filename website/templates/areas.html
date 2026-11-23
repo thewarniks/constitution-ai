@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+{% block title %}Practice Areas – {{ site.name }}{% endblock %}
+
+{% block content %}
+{{ m.page_hero("Legal Help for", "Everyday Life", "Six areas where people most often need answers. Pick one to learn the basics, or ask the AI about your own situation.", ("home", "cart", "shield")) }}
+
+<div id="services" class="section-services flat-spacing">
+    <div class="container">
+        <div class="top">
+            <div class="heading-section center mb-48">
+                <div class="heading-sub fw-semibold effectFade fadeUp">Practice Areas</div>
+                <div class="heading-title text-gradient-3 effectFade fadeRotateX">What It Can Help With</div>
+            </div>
+            <p class="text text-center effectFade fadeUp">Each area explains the key laws, common questions and the usual next steps. <br class="d-none d-lg-inline"> Open one, or ask the AI directly.</p>
+        </div>
+        <div class="accordion-faq_list gap-32" id="accordion-services">
+            {% for a in areas %}
+            <div class="accordion-faq_item style-1 effectFade fadeRotateX" role="presentation">
+                <div class="accordion-action {% if not loop.first %}collapsed{% endif %}" data-bs-target="#area-{{ loop.index }}" role="button"
+                    data-bs-toggle="collapse" aria-controls="area-{{ loop.index }}" aria-expanded="{{ 'true' if loop.first else 'false' }}">
+                    <div class="accordion-title">
+                        {{ a.title }}
+                        <i class="icon icon-arrow-top-right"></i>
+                    </div>
+                </div>
+                <div id="area-{{ loop.index }}" class="collapse {% if loop.first %}show{% endif %}" data-bs-parent="#accordion-services">
+                    <div class="accordion-content">
+                        <div class="image">
+                            <img src="/assets/images/legal/{{ a.image }}?v={{ v }}" alt="">
+                        </div>
+                        <div class="content">
+                            <div class="text-body-3 text-neutral-300 text">{{ a.intro[0] }}</div>
+                            <div class="list-tags">
+                                {% for t in a.tags %}<a href="/practice-areas/{{ a.slug }}" class="tags-item fw-semibold">{{ t }}</a>{% endfor %}
+                            </div>
+                            <div class="d-flex gap-12 flex-wrap align-items-center">
+                                <a href="/practice-areas/{{ a.slug }}" class="tf-btn">Learn more</a>
+                                <a href="/chat?q={{ a.questions[0]|urlencode }}" class="tf-btn-2">Ask about this</a>
+                            </div>
+                            <div class="text-body-1 num">0{{ loop.index }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{{ m.partner_strip(providers) }}
+<div class="box-white">
+    {{ m.process() }}
+</div>
+{{ m.pricing() }}
+{{ m.faq_section(faqs) }}
+{{ m.contact_section() }}
+{% endblock %}

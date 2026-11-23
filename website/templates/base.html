@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{{ site.name }} – {{ site.tagline }}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{% block description %}{{ site.name }} explains legal problems and court cases in plain language. Ask a question, attach a document, and get clear next steps.{% endblock %}">
+
+    <!-- font -->
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/icon/icomoon/style.css">
+    <!-- css -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="/assets/css/animate.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/site.css?v={{ v }}">
+    {% block head %}{% endblock %}
+
+    <link rel="shortcut icon" href="/assets/images/logo/favicon.svg?v={{ v }}">
+    <link rel="apple-touch-icon-precomposed" href="/assets/images/logo/favicon.svg?v={{ v }}">
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+    <canvas class="cursor-trail" id="trail" style="display: none;"></canvas>
+
+    <!-- Scroll Top -->
+    <button id="goTop" aria-label="Back to top">
+        <span class="border-progress"></span>
+        <span class="ic-wrap">
+            <span class="icon icon-long-arrow-alt-up-solid"></span>
+        </span>
+    </button>
+
+    <main id="wrapper">
+        <!-- Header -->
+        <header class="tf-header header2">
+            <div class="header-inner">
+                <a href="/" class="logo-site brand-logo" aria-label="{{ site.name }} home">
+                    <img src="/assets/images/logo/mark.svg?v={{ v }}" alt="" width="36" height="36">
+                    <span class="brand-name">{{ brand_main }}<b>{{ brand_accent }}</b></span>
+                </a>
+                <div class="box-navigation">
+                    <ul class="nav-menu-main">
+                        <li class="menu-item">
+                            <a href="/" class="item-link link1 {% if page == 'home' %}active{% endif %}">Home</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="/about" class="item-link link1 {% if page == 'about' %}active{% endif %}">About</a>
+                        </li>
+                        <li class="menu-item has-child">
+                            <a href="/practice-areas" class="item-link link1 {% if page == 'areas' %}active{% endif %}">Practice Areas</a>
+                            <ul class="sub-menu">
+                                {% for a in areas %}
+                                <li class="sub-menu-item">
+                                    <a href="/practice-areas/{{ a.slug }}" class="item-link link1">{{ a.title }}</a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li class="menu-item">
+                            <a href="/use-cases" class="item-link link1 {% if page == 'cases' %}active{% endif %}">Use Cases</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="/guides" class="item-link link1 {% if page == 'guides' %}active{% endif %}">Guides</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="/contact" class="item-link link1 {% if page == 'contact' %}active{% endif %}">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="/chat" class="tf-btn d-lg-flex d-none">
+                    Ask the AI
+                </a>
+                <a href="#" class="tf-btn open-mb-menu mobile-menu d-lg-none d-flex" aria-label="Open menu">
+                    <i class="icon icon-grip-lines-solid"></i>
+                </a>
+            </div>
+        </header>
+        <!-- /Header -->
+
+        {% block content %}{% endblock %}
+
+        <!-- footer -->
+        <footer>
+            <div class="footer-image">
+                <div class="footer-wordmark effectFade fadeUp">{{ site.name }}</div>
+            </div>
+            <div class="container">
+                <div class="footer-content">
+                    <a href="/" class="footer-logo brand-logo justify-content-center">
+                        <img src="/assets/images/logo/mark.svg?v={{ v }}" alt="" width="44" height="44">
+                        <span class="brand-name">{{ brand_main }}<b>{{ brand_accent }}</b></span>
+                    </a>
+                    <div class="title h6 fw-semibold">Know your rights. <br> Ask in plain words.</div>
+                    <div class="text">{{ disclaimer }}</div>
+                    <div class="tf-social-1 justify-content-center">
+                        <a href="/chat" class="text-body-1 fw-semibold">
+                            Ask the AI
+                            <div class="social-item"><i class="icon icon-arrow-top-right"></i></div>
+                        </a>
+                        <a href="/guides" class="text-body-1 fw-semibold">
+                            Read the guides
+                            <div class="social-item"><i class="icon icon-book-solid"></i></div>
+                        </a>
+                        <a href="/app" class="text-body-1 fw-semibold">
+                            Open the dashboard
+                            <div class="social-item"><i class="icon icon-robot-solid"></i></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <ul class="footer-links d-flex gap-24 align-items-center flex-wrap">
+                        <li><a href="/about" class="fw-semibold link-underline link1">About</a></li>
+                        <li><a href="/practice-areas" class="fw-semibold link-underline link1">Practice Areas</a></li>
+                        <li><a href="/use-cases" class="fw-semibold link-underline link1">Use Cases</a></li>
+                        <li><a href="/contact" class="fw-semibold link-underline link1">Contact</a></li>
+                    </ul>
+                    <p class="text-secondary coppy-rights text-center">© {{ year }} {{ site.name }}. Legal information, not legal advice.</p>
+                    <a href="#" class="action-go-top d-flex gap-8 align-items-center justify-content-end link1">
+                        <span class="fw-semibold">Back to top</span>
+                        <i class="icon icon-long-arrow-alt-up-solid fs-20"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+        <!-- /footer -->
+    </main>
+
+    <!-- Mobile Menu -->
+    <div class="offcanvas-menu">
+        <div class="offcanvas-content">
+            <div class="container h-100">
+                <div class="offcanvas-content_wrapin">
+                    <div class="canvas_head">
+                        <a href="/" class="logo-site brand-logo text-white">
+                            <img src="/assets/images/logo/mark.svg?v={{ v }}" alt="" width="36" height="36">
+                            <span class="brand-name">{{ brand_main }}<b>{{ brand_accent }}</b></span>
+                        </a>
+                        <div class="btn-mobile-menu close-mb-menu text-caption link" role="button" tabindex="0">
+                            <i class="icon icon-close"></i>
+                            CLOSE
+                        </div>
+                    </div>
+                    <div class="canvas_center">
+                        <ul class="nav-ul-mb" id="mobile-menu">
+                            <li><div class="item"><a href="/" class="mb-menu-link text-display-1"><span class="text">Home</span></a></div></li>
+                            <li><div class="item"><a href="/about" class="mb-menu-link text-display-1"><span class="text">About</span></a></div></li>
+                            <li>
+                                <div class="item">
+                                    <div class="has-sub-menu">
+                                        <a href="#dropdown-menu-areas" class="mb-menu-link text-display-1 collapsed" data-bs-toggle="collapse"
+                                            aria-expanded="false" aria-controls="dropdown-menu-areas">
+                                            <span class="text">Practice Areas</span>
+                                        </a>
+                                        <div id="dropdown-menu-areas" class="collapse" data-bs-parent="#mobile-menu">
+                                            <ul class="sub-nav-menu">
+                                                <li><a href="/practice-areas" class="sub-nav-link text-white">All practice areas</a></li>
+                                                {% for a in areas %}
+                                                <li><a href="/practice-areas/{{ a.slug }}" class="sub-nav-link text-white">{{ a.title }}</a></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li><div class="item"><a href="/use-cases" class="mb-menu-link text-display-1"><span class="text">Use Cases</span></a></div></li>
+                            <li><div class="item"><a href="/guides" class="mb-menu-link text-display-1"><span class="text">Guides</span></a></div></li>
+                            <li><div class="item"><a href="/contact" class="mb-menu-link text-display-1"><span class="text">Contact</span></a></div></li>
+                            <li><div class="item"><a href="/chat" class="mb-menu-link text-display-1"><span class="text">Ask the AI</span></a></div></li>
+                        </ul>
+                    </div>
+                    <div class="canvas_foot">
+                        <div class="left">
+                            <p class="text-caption text-neutral-200">Legal information, not legal advice.</p>
+                        </div>
+                        <div class="right">
+                            <a href="/app" class="tf-link-icon text-caption text-neutral-200">
+                                <i class="icon icon-arrow-top-right"></i>
+                                DASHBOARD
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Mobile Menu -->
+
+    <!-- Javascript -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/swiper-bundle.min.js"></script>
+    <script src="/assets/js/countto.js"></script>
+    <script src="/assets/js/carousel.js"></script>
+    <script src="/assets/js/infinityslide.js"></script>
+    <script src="/assets/js/ScrollSmooth.js"></script>
+    <script src="/assets/js/gsap.min.js"></script>
+    <script src="/assets/js/ScrollTrigger.min.js"></script>
+    <script src="/assets/js/ScrollToPlugin.min.js"></script>
+    <script src="/assets/js/gsapAnimation.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/site.js?v={{ v }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>

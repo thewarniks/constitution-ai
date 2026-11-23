@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Constitution Ai</title>
+<meta name="description" content="Plain-language help with legal problems and court cases.">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+<style>
+:root {
+  color-scheme: light;
+  --outer-1: #e4e4e4;
+  --outer-2: #8e8e8e;
+  --shell: #f1f1f1;
+  --shell-hi: #fafafa;
+  --panel: #e6e6e7;
+  --card: #ffffff;
+  --track: #e3e3e4;
+  --ink: #121212;
+  --ink-2: #3b3b3b;
+  --muted: #8b8b8f;
+  --line: rgba(0, 0, 0, .06);
+  --accent: #e8603c;
+  --accent-ink: #ffffff;
+  --accent-glow: rgba(232, 96, 60, .45);
+  --side-1: #4b4b4b;
+  --side-2: #2c2c2c;
+  --side-ink: #f4f4f4;
+  --side-muted: #a9a9ad;
+  --danger: #c8412b;
+  --ok: #2f8f5b;
+  --r-shell: 44px;
+  --r-card: 28px;
+  --shadow-card: 0 1px 2px rgba(0,0,0,.04), 0 10px 30px rgba(0,0,0,.06);
+  --shadow-shell: 0 30px 80px rgba(0,0,0,.18);
+  --font: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: radial-gradient(120% 90% at 30% 0%, var(--outer-1) 0%, #c9c9c9 45%, var(--outer-2) 100%) fixed;
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; border: 0; background: none; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- frame ---------- */
+.frame {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 22px;
+  max-width: 1560px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 28px;
+}
+
+/* ---------- sidebar ---------- */
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 26px 16px 16px;
+  border-radius: var(--r-shell);
+  background: linear-gradient(180deg, var(--side-1), var(--side-2));
+  box-shadow: var(--shadow-shell), inset 0 1px 0 rgba(255,255,255,.12);
+  color: var(--side-ink);
+  min-height: 0;
+}
+.brand { display: flex; align-items: center; gap: 10px; padding: 0 10px 18px; font-weight: 700; font-size: 18px; }
+.brand-mark { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); box-shadow: 0 6px 18px var(--accent-glow); }
+.brand-mark svg { width: 17px; height: 17px; }
+.nav { display: flex; flex-direction: column; gap: 4px; }
+.nav button {
+  display: flex; align-items: center; gap: 14px;
+  padding: 8px 10px; border-radius: 999px;
+  color: var(--side-muted); font-size: 16px; font-weight: 500; text-align: left;
+  transition: color .2s, background .2s;
+}
+.nav button:hover { color: var(--side-ink); background: rgba(255,255,255,.05); }
+.nav .ico {
+  width: 44px; height: 44px; flex: none; border-radius: 50%; display: grid; place-items: center;
+  background: linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.04));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 4px 10px rgba(0,0,0,.25);
+}
+.nav .ico svg { width: 19px; height: 19px; }
+.nav button[aria-current="page"] { color: var(--side-ink); }
+.nav button[aria-current="page"] .ico { background: linear-gradient(145deg, #ffffff, #e2e2e2); color: var(--accent); }
+.nav .count { margin-left: auto; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,.1); color: var(--side-ink); }
+
+.promo {
+  position: relative; overflow: hidden; margin-top: auto;
+  padding: 20px 18px 18px; border-radius: 26px;
+  background: linear-gradient(160deg, #3d3d3d, #262626);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+}
+.promo h3 { margin: 0 0 8px; font-size: 19px; font-weight: 600; line-height: 1.2; }
+.promo p { margin: 0 0 16px; color: var(--side-muted); font-size: 13.5px; line-height: 1.45; position: relative; z-index: 1; }
+.promo a {
+  position: relative; z-index: 1; display: inline-block; padding: 9px 16px; border-radius: 999px;
+  background: #fff; color: var(--ink); font-weight: 600; font-size: 13.5px; text-decoration: none;
+}
+.promo .glow {
+  position: absolute; right: -26px; bottom: -26px; width: 110px; height: 110px; border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #d8613f, #8c3a25 70%); opacity: .75;
+  display: grid; place-items: center; color: rgba(255,255,255,.35);
+}
+.promo .glow svg { width: 34px; height: 34px; transform: translate(-10px, -10px); }
+
+/* ---------- shell ---------- */
+.shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(360px, 1fr);
+  gap: 24px;
+  min-height: 0;
+  padding: 26px;
+  border-radius: var(--r-shell);
+  background: linear-gradient(150deg, var(--shell-hi), var(--shell) 60%, #ebebeb);
+  box-shadow: var(--shadow-shell), inset 0 1px 0 #fff;
+}
+.left { min-height: 0; overflow-y: auto; padding: 22px 12px 8px 22px; scrollbar-width: thin; }
+.view { display: flex; flex-direction: column; gap: 26px; }
+
+h1.hero { margin: 0; font-size: clamp(44px, 5.4vw, 80px); line-height: .98; font-weight: 600; letter-spacing: -.035em; }
+.hero-sub { margin: -8px 0 0; color: var(--muted); font-size: 16px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.chip {
+  display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 999px;
+  background: var(--card); box-shadow: var(--shadow-card); color: var(--ink-2); font-size: 13.5px; font-weight: 500;
+}
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
+.dot.warn { background: var(--accent); }
+
+h2.view-title { margin: 0; font-size: clamp(34px, 3.6vw, 52px); line-height: 1; font-weight: 600; letter-spacing: -.03em; }
+.view-lead { margin: -12px 0 0; color: var(--muted); font-size: 15.5px; line-height: 1.5; max-width: 52ch; }
+
+/* status card (the "45% to your daily goal" card) */
+.status {
+  position: relative; padding: 22px 22px 20px; border-radius: var(--r-card);
+  background: linear-gradient(145deg, #ececec, #e2e2e3);
+  box-shadow: inset 0 1px 0 #fff, 0 8px 24px rgba(0,0,0,.05);
+}
+.status h3 { margin: 0; font-size: 24px; line-height: 1.2; font-weight: 600; max-width: 18ch; letter-spacing: -.01em; }
+.round-btn {
+  width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; flex: none;
+  background: radial-gradient(circle at 35% 30%, #f07a57, var(--accent) 60%, #cf4d2b);
+  color: var(--accent-ink); box-shadow: 0 10px 26px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,.35);
+  transition: transform .15s;
+}
+.round-btn:hover { transform: translateY(-1px) scale(1.03); }
+.round-btn svg { width: 22px; height: 22px; }
+.status .round-btn { position: absolute; top: 20px; right: 22px; }
+.bar {
+  position: relative; margin-top: 26px; height: 44px; border-radius: 999px; padding: 5px;
+  background: var(--track); box-shadow: inset 0 2px 5px rgba(0,0,0,.06);
+}
+.bar-fill { height: 100%; min-width: 34px; border-radius: 999px; background: #fff; box-shadow: 0 3px 10px rgba(0,0,0,.08); transition: width .5s; }
+.bar-label { position: absolute; right: 22px; top: 50%; transform: translateY(-50%); font-size: 15px; font-weight: 600; }
+.bar-label span { color: var(--muted); font-weight: 500; }
+
+/* quick action tiles */
+.tiles { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.tile {
+  display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px 6px 18px;
+  border-radius: 999px; background: linear-gradient(180deg, #ececec, #e4e4e5);
+  box-shadow: inset 0 1px 0 #fff, 0 6px 16px rgba(0,0,0,.04);
+  font-size: 15px; color: var(--ink-2); transition: transform .15s, box-shadow .15s;
+}
+.tile:hover { transform: translateY(-2px); box-shadow: inset 0 1px 0 #fff, 0 12px 22px rgba(0,0,0,.08); }
+.tile .ico { width: 62px; height: 62px; border-radius: 50%; display: grid; place-items: center; background: #fff; box-shadow: 0 6px 16px rgba(0,0,0,.08); color: var(--ink); }
+.tile .ico svg { width: 24px; height: 24px; }
+
+/* summary */
+.summary-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.summary-head h2 { margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -.01em; }
+.seg { display: inline-flex; padding: 5px; border-radius: 999px; background: var(--track); box-shadow: inset 0 2px 4px rgba(0,0,0,.05); }
+.seg button { padding: 8px 18px; border-radius: 999px; color: var(--muted); font-size: 15px; font-weight: 500; }
+.seg button[aria-pressed="true"] { background: #fff; color: var(--ink); font-weight: 600; box-shadow: 0 3px 10px rgba(0,0,0,.08); }
+.summary { display: grid; grid-template-columns: 1.3fr 1fr; gap: 14px; }
+.s-arc { grid-column: span 2; min-height: 180px; }
+.s-card { position: relative; min-height: 170px; border-radius: var(--r-card); background: var(--card); box-shadow: var(--shadow-card); overflow: hidden; }
+.s-arc { display: grid; grid-template-columns: 1fr 1.25fr; background: linear-gradient(145deg, #ededed, #e5e5e6); }
+.s-arc svg { width: 100%; height: 100%; align-self: end; }
+.s-arc .legend { margin: 8px; padding: 16px 18px; border-radius: 22px; background: #fff; box-shadow: var(--shadow-card); display: flex; flex-direction: column; justify-content: center; gap: 12px; }
+.legend-item { display: grid; grid-template-columns: 10px 1fr; column-gap: 10px; align-items: center; }
+.legend-item i { width: 8px; height: 8px; border-radius: 50%; background: var(--ink); }
+.legend-item i.acc { background: var(--accent); }
+.legend-item span { color: var(--ink-2); font-size: 14px; }
+.legend-item b { grid-column: 2; font-size: 22px; font-weight: 600; letter-spacing: -.01em; }
+.legend-item b small { font-size: 15px; color: var(--muted); font-weight: 500; }
+.s-bars { display: flex; align-items: flex-end; justify-content: space-between; padding: 22px; gap: 14px; }
+.s-bars .num { align-self: flex-end; }
+.s-label { color: var(--ink-2); font-size: 14px; }
+.big { font-size: 30px; font-weight: 600; letter-spacing: -.02em; margin-top: 2px; }
+.bars { display: flex; align-items: flex-end; gap: 6px; height: 120px; flex: 1; justify-content: flex-end; }
+.bars .b { position: relative; width: 6px; height: 100%; border-radius: 999px; background: var(--track); }
+.bars .b i { position: absolute; left: 0; right: 0; bottom: 0; border-radius: 999px; background: var(--ink); transition: height .5s; }
+.s-dark { background: linear-gradient(160deg, #4a4a4a, #2a2a2a); color: #fff; padding: 22px; display: flex; flex-direction: column; justify-content: flex-end; }
+.s-dark svg { position: absolute; top: 18px; left: 22px; right: 18px; width: calc(100% - 40px); height: 70px; }
+.s-dark .s-label { color: #c9c9cc; }
+
+/* generic cards / forms for other views */
+.card { padding: 20px 22px; border-radius: var(--r-card); background: var(--card); box-shadow: var(--shadow-card); }
+.card h3 { margin: 0 0 4px; font-size: 18px; font-weight: 600; }
+.hint { color: var(--muted); font-size: 13.5px; line-height: 1.45; margin: 0; }
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field > span { font-size: 13.5px; color: var(--ink-2); font-weight: 600; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.input, select.input, textarea.input {
+  width: 100%; padding: 12px 16px; border-radius: 16px; border: 1px solid var(--line);
+  background: #f6f6f6; outline: none; transition: border .15s, background .15s;
+}
+.input:focus { background: #fff; border-color: rgba(232,96,60,.5); }
+textarea.input { resize: vertical; min-height: 96px; line-height: 1.45; }
+.switch { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); }
+.switch:first-of-type { border-top: 0; }
+.switch b { font-weight: 600; font-size: 15px; }
+.toggle { position: relative; width: 46px; height: 28px; flex: none; }
+.toggle input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.toggle span { position: absolute; inset: 0; border-radius: 999px; background: var(--track); transition: background .2s; pointer-events: none; }
+.toggle span::after { content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.15); transition: transform .2s; }
+.toggle input:checked + span { background: var(--accent); }
+.toggle input:checked + span::after { transform: translateX(18px); }
+.pill-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: #fff; box-shadow: var(--shadow-card); font-weight: 600; font-size: 14.5px; }
+.pill-btn.dark { background: var(--ink); color: #fff; }
+.pill-btn.danger { color: var(--danger); }
+.pill-btn svg { width: 17px; height: 17px; }
+.row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.list { display: flex; flex-direction: column; gap: 10px; }
+.item { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 22px; background: #fff; box-shadow: var(--shadow-card); }
+.item .meta { flex: 1; min-width: 0; }
+.item .meta b { display: block; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.item .meta small { color: var(--muted); font-size: 13px; }
+.item.active { outline: 2px solid rgba(232,96,60,.45); }
+.icon-btn { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; color: var(--ink-2); flex: none; transition: background .15s; }
+.icon-btn:hover { background: #f0f0f0; }
+.icon-btn svg { width: 18px; height: 18px; }
+.drop {
+  display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 26px; text-align: center;
+  border-radius: var(--r-card); border: 2px dashed #cfcfd2; background: rgba(255,255,255,.5); color: var(--ink-2);
+  transition: border-color .15s, background .15s; cursor: pointer;
+}
+.drop.over { border-color: var(--accent); background: #fff; }
+.empty { padding: 28px; text-align: center; color: var(--muted); }
+
+/* ---------- chat panel ---------- */
+.chat {
+  position: relative; display: flex; flex-direction: column; min-height: 0;
+  border-radius: 34px; background: linear-gradient(170deg, #e2e2e3, #ebebec 40%, #e6e6e7);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+  overflow: hidden;
+}
+.chat::before {
+  content: ""; position: absolute; top: -90px; left: 50%; width: 360px; height: 220px; transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgba(232,96,60,.28), transparent); pointer-events: none;
+}
+.chat-head { position: relative; display: flex; align-items: center; justify-content: center; padding: 20px 18px 6px; gap: 8px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 999px;
+  background: var(--accent); color: #fff; font-weight: 600; font-size: 16px; box-shadow: 0 10px 24px var(--accent-glow);
+}
+.badge svg { width: 18px; height: 18px; }
+.chat-head .icon-btn { position: absolute; top: 18px; }
+.chat-head .new { left: 18px; }
+.chat-head .more { right: 18px; }
+.chat-head .icon-btn { background: rgba(255,255,255,.6); }
+.chat-head .icon-btn:hover { background: #fff; }
+.msgs { flex: 1; min-height: 0; overflow-y: auto; padding: 14px 24px 18px; display: flex; flex-direction: column; gap: 6px; scrollbar-width: thin; }
+.msg { max-width: 88%; }
+.msg.user { align-self: flex-end; text-align: right; }
+.msg.user .bubble { background: linear-gradient(145deg, #dededf, #d6d6d8); border-radius: 26px 26px 8px 26px; text-align: left; white-space: pre-wrap; }
+.msg.bot { align-self: flex-start; }
+.msg.bot .bubble { background: #fff; border-radius: 26px 26px 26px 8px; box-shadow: var(--shadow-card); }
+.bubble { display: inline-block; padding: 14px 20px; font-size: 16px; line-height: 1.5; font-weight: 500; overflow-wrap: anywhere; }
+.msg .time { margin: 6px 6px 12px; color: var(--muted); font-size: 13px; }
+.msg.bot .time { display: flex; align-items: center; gap: 4px; }
+.msg.bot .time .icon-btn { width: 30px; height: 30px; }
+.msg.bot .time .icon-btn svg { width: 15px; height: 15px; }
+.bubble.md { font-weight: 450; }
+.bubble.md > :first-child { margin-top: 0; }
+.bubble.md > :last-child { margin-bottom: 0; }
+.bubble.md h1, .bubble.md h2, .bubble.md h3 { font-size: 17px; margin: 14px 0 6px; }
+.bubble.md p { margin: 0 0 10px; }
+.bubble.md ul, .bubble.md ol { margin: 0 0 10px; padding-left: 22px; }
+.bubble.md table { border-collapse: collapse; margin: 8px 0 12px; font-size: 14px; display: block; overflow-x: auto; }
+.bubble.md th, .bubble.md td { border: 1px solid #e6e6e6; padding: 6px 9px; text-align: left; vertical-align: top; }
+.bubble.md th { background: #f6f6f6; }
+.bubble.md code { background: #f3f3f3; padding: 1px 5px; border-radius: 6px; font-size: 14px; }
+.bubble.md a { color: var(--accent); }
+.bubble.md em:last-child { color: var(--muted); }
+.thinking { margin: 0 0 8px; font-size: 14px; color: var(--muted); }
+.thinking summary { cursor: pointer; font-weight: 600; }
+.thinking div { white-space: pre-wrap; margin-top: 6px; font-style: italic; max-height: 220px; overflow: auto; }
+.typing { display: inline-flex; gap: 4px; padding: 4px 0; }
+.typing i { width: 7px; height: 7px; border-radius: 50%; background: #bbb; animation: blink 1.2s infinite; }
+.typing i:nth-child(2) { animation-delay: .2s; }
+.typing i:nth-child(3) { animation-delay: .4s; }
+@keyframes blink { 0%, 80%, 100% { opacity: .25; } 40% { opacity: 1; } }
+.attach-list { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; margin-bottom: 6px; }
+.attach { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px; background: #fff; font-size: 13px; box-shadow: var(--shadow-card); }
+.attach img { width: 26px; height: 26px; border-radius: 8px; object-fit: cover; }
+.attach button { color: var(--muted); font-size: 16px; line-height: 1; }
+.err { color: var(--danger); }
+.welcome { margin: auto 0; padding: 10px 6px; display: flex; flex-direction: column; gap: 10px; }
+.welcome .bubble { background: #fff; border-radius: 26px 26px 26px 8px; box-shadow: var(--shadow-card); max-width: 92%; }
+.starters { display: flex; flex-wrap: wrap; gap: 8px; }
+.starters button { padding: 9px 14px; border-radius: 999px; background: rgba(255,255,255,.7); font-size: 14px; color: var(--ink-2); box-shadow: 0 2px 8px rgba(0,0,0,.04); text-align: left; }
+.starters button:hover { background: #fff; }
+
+.composer { position: relative; padding: 0 18px 14px; }
+.pending { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 6px 8px; }
+.input-pill {
+  display: flex; align-items: flex-end; gap: 6px; padding: 8px 8px 8px 10px; border-radius: 34px;
+  background: #fff; box-shadow: 0 12px 30px rgba(0,0,0,.08);
+}
+.input-pill textarea {
+  flex: 1; min-height: 44px; max-height: 180px; resize: none; border: 0; outline: none; background: transparent;
+  padding: 11px 6px; font-size: 16px; line-height: 1.4; overflow-y: hidden;
+}
+.input-pill textarea::placeholder { color: #a5a5a9; }
+.input-pill .icon-btn { width: 44px; height: 44px; color: #9a9a9e; }
+.input-pill .icon-btn.rec { color: var(--accent); background: #fff1ec; }
+.send { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: #fff; box-shadow: 0 6px 16px var(--accent-glow); flex: none; }
+.send:disabled { background: #d9d9db; box-shadow: none; cursor: default; }
+.send svg { width: 19px; height: 19px; }
+.foot { margin: 8px 8px 0; color: var(--muted); font-size: 12px; text-align: center; line-height: 1.4; }
+
+/* ---------- dialog & toast ---------- */
+dialog {
+  border: 0; padding: 0; border-radius: 32px; max-width: min(560px, calc(100vw - 32px));
+  box-shadow: 0 40px 100px rgba(0,0,0,.3); background: var(--shell-hi); color: var(--ink);
+}
+dialog::backdrop { background: rgba(30,30,30,.45); backdrop-filter: blur(4px); }
+.dlg { padding: 28px; display: flex; flex-direction: column; gap: 14px; }
+.dlg h2 { margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -.02em; }
+.dlg p { margin: 0; color: var(--ink-2); line-height: 1.55; }
+.dlg .round-btn { width: 52px; height: 52px; }
+.toast {
+  position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%) translateY(20px); opacity: 0;
+  padding: 12px 18px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 14px; font-weight: 500;
+  box-shadow: 0 16px 40px rgba(0,0,0,.25); transition: opacity .2s, transform .2s; pointer-events: none; z-index: 10; max-width: calc(100vw - 32px);
+}
+.toast.show { opacity: 1; transform: translateX(-50%); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1180px) {
+  .frame { grid-template-columns: 92px minmax(0, 1fr); }
+  .brand span, .nav .label, .nav .count, .promo { display: none; }
+  .brand { justify-content: center; padding: 0 0 18px; }
+  .nav button { justify-content: center; padding: 6px; }
+}
+@media (max-width: 900px) {
+  .frame { display: flex; flex-direction: column; height: auto; min-height: 100vh; padding: 16px; gap: 14px; }
+  .side { flex-direction: row; align-items: center; padding: 10px; border-radius: 30px; }
+  .brand { padding: 0 6px; }
+  .nav { flex-direction: row; gap: 2px; flex: 1; justify-content: space-around; }
+  .nav .ico { width: 42px; height: 42px; }
+  .shell { display: flex; flex-direction: column; padding: 14px; border-radius: 30px; }
+  .left { overflow: visible; padding: 10px 6px; }
+  .chat { min-height: 78vh; border-radius: 26px; }
+  .tiles { grid-template-columns: repeat(5, minmax(56px, 1fr)); overflow-x: auto; scrollbar-width: none; }
+}
+@media (max-width: 600px) {
+  .brand { display: none; }
+  .tiles { gap: 6px; }
+  .tile { font-size: 12.5px; padding: 12px 2px 14px; }
+  .tile .ico { width: 46px; height: 46px; }
+  .summary { grid-template-columns: 1fr; }
+  .s-arc { grid-column: auto; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .msgs { padding: 10px 14px; }
+  .composer { padding: 0 10px 12px; }
+  .msg { max-width: 96%; }
+  .status h3 { font-size: 20px; max-width: 14ch; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-dash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></symbol>
+    <symbol id="i-chats" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></symbol>
+    <symbol id="i-data" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v13c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8v-13"/><path d="M4.5 12c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 21h10M5 7h14M12 7 12 7"/><path d="m5 7-3 7a3.5 3.5 0 0 0 6 0L5 7zm14 0-3 7a3.5 3.5 0 0 0 6 0l-3-7z"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 2 4 13.5h6.5L9.5 22 20 9.5h-6.5L13.5 2z"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h3l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.4a1.5 1.5 0 0 0 1.5-1.1L21 7H6.3"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v6c0 4.4 3.2 8 7.5 9 4.3-1 7.5-4.6 7.5-9V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-family" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="7" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M2.5 20v-1.5A5 5 0 0 1 7.5 13.5h1a5 5 0 0 1 5 5V20M14.5 14.5a4 4 0 0 1 7 2.6V20"/></symbol>
+    <symbol id="i-work" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8.5 7V5.5A1.5 1.5 0 0 1 10 4h4a1.5 1.5 0 0 1 1.5 1.5V7M3 12.5h18"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24" fill="currentColor"><rect x="7" y="7" width="10" height="10" rx="2"/></symbol>
+    <symbol id="i-clip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m20 11.5-7.8 7.8a5 5 0 0 1-7.1-7.1l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7l-8.5 8.5a1.7 1.7 0 0 1-2.4-2.4l7.8-7.8"/></symbol>
+    <symbol id="i-redo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9.5 7V4.5h5V7M6.5 7l1 13h9l1-13"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 8.5l5-5 5 5M5 20h14"/></symbol>
+    <symbol id="i-bot" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a7.5 7.5 0 0 0-7.5 7.5V14a3 3 0 0 0 3 3h1.3l2.3 3.2a1.1 1.1 0 0 0 1.8 0L15.2 17h1.3a3 3 0 0 0 3-3v-3.5A7.5 7.5 0 0 0 12 3zm-3 9.2a1.4 1.4 0 1 1 0-2.8 1.4 1.4 0 0 1 0 2.8zm6 0a1.4 1.4 0 1 1 0-2.8 1.4 1.4 0 0 1 0 2.8z"/></symbol>
+  </defs>
+</svg>
+
+<div class="frame">
+  <aside class="side">
+    <div class="brand"><div class="brand-mark"><svg><use href="#i-bolt"/></svg></div><span>Constitution Ai</span></div>
+    <nav class="nav" aria-label="Main">
+      <button data-view="dashboard" aria-current="page"><span class="ico"><svg><use href="#i-dash"/></svg></span><span class="label">Dashboard</span></button>
+      <button data-view="chats"><span class="ico"><svg><use href="#i-chats"/></svg></span><span class="label">Chats</span><span class="count" id="nav-chats">0</span></button>
+      <button data-view="datasets"><span class="ico"><svg><use href="#i-data"/></svg></span><span class="label">Datasets</span><span class="count" id="nav-datasets">0</span></button>
+      <button data-view="settings"><span class="ico"><svg><use href="#i-gear"/></svg></span><span class="label">Settings</span></button>
+      <button data-view="about"><span class="ico"><svg><use href="#i-scale"/></svg></span><span class="label">About</span></button>
+    </nav>
+    <div class="promo">
+      <h3>Need a real lawyer?</h3>
+      <p id="promo-text">Free legal aid is available. In India, call the NALSA helpline on 15100.</p>
+      <a id="promo-link" href="https://nalsa.gov.in" target="_blank" rel="noopener">Find legal aid</a>
+      <div class="glow"><svg><use href="#i-bolt"/></svg></div>
+    </div>
+  </aside>
+
+  <main class="shell">
+    <section class="left">
+      <!-- Dashboard -->
+      <div class="view" id="view-dashboard">
+        <h1 class="hero">Let’s sort out<br>your case.</h1>
+        <p class="hero-sub" id="hero-sub"></p>
+
+        <div class="status">
+          <h3 id="status-title">You’re asking about Indian law</h3>
+          <button class="round-btn" data-go="settings" aria-label="Open settings"><svg><use href="#i-bolt"/></svg></button>
+          <div class="bar" title="Reference datasets used for answers">
+            <div class="bar-fill" id="status-fill" style="width:12%"></div>
+            <div class="bar-label" id="status-label">0<span>/0 datasets</span></div>
+          </div>
+        </div>
+
+        <div class="tiles" id="tiles"></div>
+
+        <div class="summary-head">
+          <h2>Summary</h2>
+          <div class="seg" role="group" aria-label="Period">
+            <button data-period="daily" aria-pressed="false">Daily</button>
+            <button data-period="weekly" aria-pressed="true">Weekly</button>
+            <button data-period="monthly" aria-pressed="false">Monthly</button>
+          </div>
+        </div>
+        <div class="summary">
+          <div class="s-card s-arc">
+            <svg viewBox="0 0 200 170" preserveAspectRatio="xMinYMax meet" aria-hidden="true">
+              <path d="M10 170 A150 150 0 0 1 160 20" pathLength="100" fill="none" stroke="#d8d8da" stroke-width="10" stroke-linecap="round"/>
+              <path id="arc-outer" d="M10 170 A150 150 0 0 1 160 20" pathLength="100" fill="none" stroke="#e8603c" stroke-width="10" stroke-linecap="round" stroke-dasharray="0 100"/>
+              <path d="M38 170 A122 122 0 0 1 160 48" pathLength="100" fill="none" stroke="#dcdcde" stroke-width="10" stroke-linecap="round"/>
+              <path id="arc-inner" d="M38 170 A122 122 0 0 1 160 48" pathLength="100" fill="none" stroke="#121212" stroke-width="10" stroke-linecap="round" stroke-dasharray="0 100"/>
+            </svg>
+            <div class="legend">
+              <div class="legend-item"><i></i><span>Answered</span><b id="sum-answered">0<small>/0</small></b></div>
+              <div class="legend-item"><i class="acc"></i><span>With references</span><b id="sum-grounded">0<small>/0</small></b></div>
+            </div>
+          </div>
+          <div class="s-card s-bars">
+            <div class="num"><div class="s-label">Questions</div><div class="big" id="sum-questions">0</div></div>
+            <div class="bars" id="bars"></div>
+          </div>
+          <div class="s-card s-dark">
+            <svg viewBox="0 0 200 70" fill="none" aria-hidden="true">
+              <path d="M8 58 L22 26 L54 20 L70 26 L96 52 L132 46 L168 14 L190 20 L176 34 L128 40" stroke="#e8603c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M22 26 L54 20 L70 26" stroke="#f4b19c" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+            <div class="s-label">Saved chats</div>
+            <div class="big" id="sum-chats">0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chats -->
+      <div class="view" id="view-chats" hidden>
+        <h2 class="view-title">Your chats</h2>
+        <p class="view-lead">Saved in this browser only. Open one to continue it, or download it to share with your lawyer.</p>
+        <div class="row">
+          <input class="input" id="chat-search" type="search" placeholder="Search chats" style="flex:1;min-width:180px">
+          <button class="pill-btn dark" id="chats-new"><svg><use href="#i-plus"/></svg>New chat</button>
+        </div>
+        <div class="list" id="chat-list"></div>
+        <div class="row"><button class="pill-btn danger" id="chats-clear"><svg><use href="#i-trash"/></svg>Delete all chats</button></div>
+      </div>
+
+      <!-- Datasets -->
+      <div class="view" id="view-datasets" hidden>
+        <h2 class="view-title">Reference datasets</h2>
+        <p class="view-lead">Upload laws, judgments, FAQs or case notes. For each question, the most relevant passages from the switched-on datasets are sent to the model, and answers cite them like [file #n].</p>
+        <label class="drop" id="drop">
+          <svg width="28" height="28"><use href="#i-up"/></svg>
+          <b>Drop files here or click to upload</b>
+          <span class="hint">.txt, .md, .csv, .json, .jsonl or .docx</span>
+          <input type="file" id="ds-file" multiple accept=".txt,.md,.csv,.json,.jsonl,.docx" hidden>
+        </label>
+        <div class="card">
+          <label class="field"><span>Passages per question</span>
+            <input class="input" id="set-topk" type="number" min="1" max="20" style="max-width:140px">
+          </label>
+        </div>
+        <div class="list" id="ds-list"></div>
+      </div>
+
+      <!-- Settings -->
+      <div class="view" id="view-settings" hidden>
+        <h2 class="view-title">Settings</h2>
+        <p class="view-lead">Choose who answers and how. API keys stay on the server in the <code>.env</code> file.</p>
+        <div class="card">
+          <h3>Model</h3>
+          <div class="grid-2" style="margin-top:12px">
+            <label class="field"><span>Provider</span><select class="input" id="set-provider"></select></label>
+            <label class="field"><span>Model</span><select class="input" id="set-model"></select></label>
+          </div>
+          <p class="hint" id="provider-hint" style="margin-top:10px"></p>
+        </div>
+        <div class="card">
+          <h3>Your situation</h3>
+          <div class="grid-2" style="margin-top:12px">
+            <label class="field"><span>Jurisdiction</span><select class="input" id="set-jurisdiction"></select></label>
+            <label class="field"><span>Answer language</span><select class="input" id="set-language"></select></label>
+          </div>
+        </div>
+        <div class="card" id="claude-card">
+          <h3>Claude options</h3>
+          <label class="field" style="margin:12px 0 6px"><span>Effort</span>
+            <select class="input" id="set-effort"><option>low</option><option>medium</option><option>high</option><option>max</option></select>
+          </label>
+          <div class="switch"><div><b>Search the web for current law</b><p class="hint">Needs web search turned on in the Anthropic Console.</p></div><label class="toggle"><input type="checkbox" id="set-web"><span></span></label></div>
+        </div>
+        <div class="card" id="other-card">
+          <h3>Answer style</h3>
+          <div class="grid-2" style="margin-top:12px">
+            <label class="field"><span>Temperature (empty = default)</span><input class="input" id="set-temp" type="number" min="0" max="2" step="0.1" placeholder="default"></label>
+            <label class="field"><span>Max tokens (empty = default)</span><input class="input" id="set-maxtok" type="number" min="1" step="1" placeholder="default"></label>
+          </div>
+        </div>
+        <div class="card">
+          <div class="switch"><div><b>Show reasoning</b><p class="hint">Show how the model reasoned, when it shares that.</p></div><label class="toggle"><input type="checkbox" id="set-reasoning"><span></span></label></div>
+          <label class="field" style="margin-top:8px"><span>Custom instructions</span>
+            <textarea class="input" id="set-instructions" placeholder="e.g. I'm a law student, cite sections and leading cases."></textarea>
+          </label>
+        </div>
+        <div class="row"><a class="pill-btn" href="/classic">Open the classic page</a></div>
+      </div>
+
+      <!-- About -->
+      <div class="view" id="view-about" hidden>
+        <h2 class="view-title">About</h2>
+        <div class="card">
+          <h3>Legal information, not legal advice</h3>
+          <p class="hint" id="about-disclaimer" style="font-size:15px;margin-top:8px"></p>
+        </div>
+        <div class="card">
+          <h3>Tips for better answers</h3>
+          <ul class="hint" style="font-size:15px;padding-left:20px;margin:8px 0 0">
+            <li>Say where it happened (state or city) and the key dates.</li>
+            <li>Attach the notice, contract, FIR or order you received (PDF, Word or a photo).</li>
+            <li>Upload the actual Act under Datasets so answers quote real sections.</li>
+            <li>Check important points with a lawyer before acting.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="chat" aria-label="Chat">
+      <div class="chat-head">
+        <button class="icon-btn new" id="new-chat" aria-label="New chat" title="New chat"><svg><use href="#i-plus"/></svg></button>
+        <div class="badge"><svg><use href="#i-bot"/></svg>AI Legal Chatbot</div>
+        <button class="icon-btn more" id="download-chat" aria-label="Download this chat" title="Download this chat"><svg><use href="#i-down"/></svg></button>
+      </div>
+      <div class="msgs" id="msgs" aria-live="polite"></div>
+      <div class="composer">
+        <div class="pending" id="pending"></div>
+        <div class="input-pill">
+          <button class="icon-btn" id="attach" aria-label="Attach a document or photo" title="Attach a document or photo"><svg><use href="#i-clip"/></svg></button>
+          <input type="file" id="attach-file" multiple accept=".pdf,.docx,.txt,.md,image/*" hidden>
+          <textarea id="prompt" rows="1" placeholder="Type something.."></textarea>
+          <button class="icon-btn" id="mic" aria-label="Speak your question" title="Speak your question"><svg><use href="#i-mic"/></svg></button>
+          <button class="send" id="send" aria-label="Send"><svg><use href="#i-send"/></svg></button>
+        </div>
+        <p class="foot">General legal information, not legal advice. Check important points with a lawyer.</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<dialog id="disclaimer">
+  <div class="dlg">
+    <button class="round-btn" tabindex="-1" aria-hidden="true"><svg><use href="#i-scale"/></svg></button>
+    <h2>Before you start</h2>
+    <p id="disclaimer-text"></p>
+    <div class="row" style="justify-content:flex-end"><button class="pill-btn dark" id="accept">I understand, continue</button></div>
+  </div>
+</dialog>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+{% block title %}{{ area.title }} – {{ site.name }}{% endblock %}
+{% block description %}{{ area.short }} Get plain-language answers about {{ area.title|lower }} from {{ site.name }}.{% endblock %}
+
+{% block content %}
+{{ m.page_hero(area.title, "Explained", area.short, (area.icon, "doc", "scale")) }}
+
+<div id="services" class="section-services-single flat-spacing pt-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="top-image mb-40 effectFade fadeZoom">
+                    <img src="/assets/images/legal/{{ area.image }}?v={{ v }}" alt="">
+                </div>
+            </div>
+            <div class="col-12">
+                <h2 class="heading fw-semibold mb-20 effectFade fadeUp">{{ area.title }}</h2>
+            </div>
+        </div>
+        <div class="row mb-80">
+            <div class="col-md-7 md-mb-24">
+                <p class="text-secondary effectFade fadeUp">{{ area.intro[0] }}</p>
+            </div>
+            <div class="col-md-5">
+                <p class="text-secondary mb-30 effectFade fadeUp">{{ area.intro[1] }}</p>
+                <div class="list-tags effectFade fadeUp">
+                    {% for t in area.tags %}<span class="tags-item fw-semibold">{{ t }}</span>{% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-40">
+            <div class="col-12">
+                <h2 class="heading fw-semibold mb-20 effectFade fadeUp">Key laws</h2>
+                <div class="law-grid">
+                    {% for name, note in area.laws %}
+                    <div class="law-card effectFade fadeUp" data-delay="{{ (loop.index0 % 3) / 10 }}">
+                        <i class="icon icon-book-solid"></i>
+                        <h6 class="fw-semibold">{{ name }}</h6>
+                        <p class="text-secondary mb-0">{{ note }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-between">
+            <div class="col-md-6 md-mb-24">
+                <h2 class="heading fw-semibold mb-20 effectFade fadeUp">What it covers</h2>
+                <ul class="list-text type-check mb-30">
+                    {% for c in area.covers %}
+                    <li class="effectFade fadeUp"><i class="icon icon-check-solid"></i> {{ c }}</li>
+                    {% endfor %}
+                </ul>
+                <h6 class="title fw-semibold mb-16 effectFade fadeUp">Try asking</h6>
+                <div class="d-grid gap-8 mb-30">
+                    {% for q in area.questions %}
+                    <a class="ask-link effectFade fadeUp" href="/chat?q={{ q|urlencode }}">
+                        <i class="icon icon-comments-solid"></i> {{ q }}
+                    </a>
+                    {% endfor %}
+                </div>
+                <a href="/chat?q={{ area.questions[0]|urlencode }}" class="tf-btn effectFade fadeRotateX">Ask the AI</a>
+            </div>
+            <div class="col-md-5">
+                <div class="image bot-image effectFade fadeUp">
+                    <img src="/assets/images/legal/{{ related_case.image if related_case else 'court.svg' }}?v={{ v }}" alt="">
+                </div>
+                {% if related_case %}
+                <div class="related-case mt-4 effectFade fadeUp">
+                    <div class="text-secondary fw-semibold mb-8">EXAMPLE</div>
+                    <h6 class="fw-semibold"><a class="link1" href="/use-cases/{{ related_case.slug }}">{{ related_case.title }}</a></h6>
+                    <p class="text-secondary mb-0">{{ related_case.summary }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="box-white">
+    {{ m.process() }}
+</div>
+{{ m.faq_section(faqs, pad_top=true) }}
+{{ m.contact_section() }}
+{% endblock %}

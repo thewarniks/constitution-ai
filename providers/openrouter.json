@@ -1,0 +1,18 @@
+{
+    "chatbotStore": {
+        "apiKey": "",
+        "url": "https://openrouter.ai",
+        "path": "/api/v1/chat/completions",
+        "model": "openrouter/free",
+        "max_tokens_value": ""
+    },
+    "defaultChoiceStore": {
+        "model": [
+            "openrouter/free"
+        ]
+    },
+    "title": "OpenRouter (free models)",
+    "modelsUrl": "https://openrouter.ai/api/v1/models",
+    "modelsFreeOnly": true,
+    "modelsExclude": ["lyria", "content-safety", "guard"]
+}

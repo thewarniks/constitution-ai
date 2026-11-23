@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+{% block title %}Use Cases – {{ site.name }}{% endblock %}
+
+{% block content %}
+{{ m.page_hero("Real Problems,", "Clear Steps", "Example situations people bring to Constitution Ai, and how it helps them work out what to do next.", ("doc", "home", "rupee")) }}
+
+<div id="works" class="section-featured-works flat-spacing">
+    <div class="container">
+        <div class="heading-section mb-0">
+            <div class="heading-sub fw-semibold mx-auto effectFade fadeUp">Use Cases</div>
+        </div>
+        <div class="featured-works-list position-relative">
+            {% for c in cases %}
+            <div class="">
+                <div class="featured-works-item {% if loop.first %}effectFade fadeUp no-div{% endif %}">
+                    <div class="image main-mouse-hover">
+                        <img src="/assets/images/legal/{{ c.image }}?v={{ v }}" alt="">
+                        <a href="/use-cases/{{ c.slug }}" class="tf-mouse view-project h6">
+                            View Example
+                            <i class="icon icon-arrow-top-right"></i>
+                        </a>
+                    </div>
+                    <div class="content">
+                        <div class="pagi-dot">
+                            {% for i in range(cases|length) %}<span class="{% if i == loop.index0 %}active{% endif %}"></span>{% endfor %}
+                        </div>
+                        <div class="bot">
+                            <h4 class="heading fw-semibold"><a href="/use-cases/{{ c.slug }}" class="link1">{{ c.title }}</a></h4>
+                            <div class="grid-text">
+                                <div class="item">
+                                    <div class="title text-secondary">SITUATION</div>
+                                    <div class="text-body-3 fw-semibold">{{ c.summary }}</div>
+                                </div>
+                                <div class="item">
+                                    <div class="title text-secondary">HOW IT HELPS</div>
+                                    <div class="fw-semibold text-body-3">{{ c.helps[0] }}</div>
+                                </div>
+                                <div class="item">
+                                    <div class="title text-secondary">AREA</div>
+                                    <div class="fw-semibold text-body-3">{{ area_titles[c.area] }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="box-white">
+    <!-- section-delay: deadlines -->
+    <div class="section-delay flat-spacing">
+        <div class="container">
+            <div class="heading-section center mb-64">
+                <div class="heading-sub fw-semibold effectFade fadeUp">Why acting early matters</div>
+                <div class="heading-title text-gradient-3 effectFade fadeRotateX">Many legal rights come <br> with a deadline.</div>
+            </div>
+            <div class="delay-wrap">
+                {% for title, value, pct, law in [
+                    ("Demand notice for a bounced cheque", "30 days", 18, "/ NI Act, s.138"),
+                    ("Notice before suing the government", "2 months", 30, "/ CPC, s.80"),
+                    ("Filing a consumer complaint", "2 years", 70, "/ CPA 2019, s.69"),
+                    ("Most suits to recover money", "3 years", 95, "/ Limitation Act, 1963"),
+                ] %}
+                <div class="delay-item">
+                    <div class="left">
+                        <h6 class="effectFade fadeUp title fw-semibold mb-12">{{ title }}</h6>
+                        <h6 class="effectFade fadeUp title fw-semibold">/ 0{{ loop.index }}</h6>
+                    </div>
+                    <div class="right">
+                        <div class="delay-progress mb-12">
+                            <div class="progress-line" data-progress="{{ pct }}"></div>
+                            <h4 class="number-progress fw-semibold text-white">{{ value }}</h4>
+                        </div>
+                        <div class="text text-secondary text-end">{{ law }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <p class="text-center text-secondary mt-4 mb-0">General time limits in India. Exact periods depend on the facts; ask the AI or a lawyer about yours.</p>
+        </div>
+    </div>
+</div>
+
+{{ m.pricing() }}
+{{ m.faq_section(faqs) }}
+{{ m.contact_section() }}
+{% endblock %}

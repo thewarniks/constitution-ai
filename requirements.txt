@@ -1,0 +1,8 @@
+flask
+requests
+python-dotenv
+anthropic
+python-docx
+# Only needed for the alternative Streamlit app (app.py)
+streamlit
+pillow

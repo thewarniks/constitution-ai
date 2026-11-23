@@ -1,0 +1,17 @@
+{
+    "chatbotStore": {
+        "apiKey": "",
+        "url": "https://api.x.ai",
+        "path": "/v1/chat/completions",
+        "model": "grok-4",
+        "max_tokens_value": ""
+    },
+    "defaultChoiceStore": {
+        "model": [
+            "grok-4"
+        ]
+    },
+    "title": "xAI Grok",
+    "modelsUrl": "https://api.x.ai/v1/models",
+    "modelsExclude": ["image", "imagine", "video", "embed"]
+}

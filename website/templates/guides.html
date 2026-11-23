@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+{% block title %}Legal Guides – {{ site.name }}{% endblock %}
+{% block description %}Short, plain-language guides to common legal questions in India: legal notices, FIRs, consumer complaints, cheque bounce, deposits and free legal aid.{% endblock %}
+
+{% block content %}
+{{ m.page_title("Legal Guides", [("Guides", None)]) }}
+
+<section class="section-blog flat-spacing">
+    <div class="container">
+        <p class="text-center text-secondary mb-48 effectFade fadeUp">Short, plain-language guides to common legal questions in India, reviewed {{ reviewed }}.</p>
+        <div class="tf-grid-layout sm-col-2 xl-col-3">
+            {% for g in guides %}
+            <div class="article-blog hover-img effectFade fadeUp no-div" data-delay="{{ (loop.index0 % 3) / 10 }}">
+                <a href="/guides/{{ g.slug }}" class="blog-image img-style">
+                    <img loading="lazy" width="426" height="246" src="/assets/images/legal/{{ g.image }}?v={{ v }}" alt="">
+                </a>
+                <div class="blog-content">
+                    <div class="infor">
+                        <p class="infor_sub text-secondary">{{ g.category }}</p>
+                        <h6 class="fw-semibold">
+                            <a href="/guides/{{ g.slug }}" class="link1 infor_name">{{ g.title }}</a>
+                        </h6>
+                        <p class="text-secondary text-body-3 mt-2 mb-0">{{ g.summary }}</p>
+                    </div>
+                    <a href="/guides/{{ g.slug }}" class="tf-btn-2">
+                        Read more
+                        <i class="icon icon-arrow-top-right"></i>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

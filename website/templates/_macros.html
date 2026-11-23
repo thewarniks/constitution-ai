@@ -1,0 +1,393 @@
+{# Reusable sections, adapted from the Aigocy template. #}
+
+{% macro page_hero(title1, title2, text, icons=("scale", "gavel", "doc")) %}
+<div class="section-hero v1">
+    <div class="hero-image"></div>
+    <div class="container">
+        <div class="content-wrap text-center">
+            <h1 class="title text-display-2 effectFade fadeRotateX">
+                <span class="title1 fw-semibold text-gradient-1">{{ title1 }}</span>
+                <br>
+                <span class="title2 d-flex gap-20 justify-content-center flex-wrap">
+                    <span class="fw-semibold text-gradient-1">{{ title2 }}</span>
+                    <span class="title-icon">
+                        <span class="box"></span>
+                        <span class="title-icon-wrap">
+                            <img class="img-1 img-transform-3" src="/assets/images/legal/hero-a-{{ icons[0] }}.svg" alt="" width="133" height="80">
+                            <img class="img-2 img-transform-3" src="/assets/images/legal/hero-b-{{ icons[1] }}.svg" alt="" width="115" height="115">
+                            <img class="img-3 img-transform-3" src="/assets/images/legal/hero-c-{{ icons[2] }}.svg" alt="" width="105" height="105">
+                        </span>
+                    </span>
+                </span>
+            </h1>
+            <p class="text effectFade fadeUp">{{ text }}</p>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro page_title(title, crumbs) %}
+<div class="section-page-title">
+    <div class="container text-center">
+        <h1 class="page-title fw-semibold effectFade fadeZoom">{{ title }}</h1>
+        <div class="breadcrumbs effectFade fadeUp">
+            <a href="/" class="link1">Home</a>
+            {% for label, href in crumbs %}
+            <div>/</div>
+            {% if href %}<a href="{{ href }}" class="link1">{{ label }}</a>{% else %}<div>{{ label }}</div>{% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro partner_strip(providers) %}
+<div class="section-partner">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="partner-wrap">
+                    <p class="text-secondary text fw-semibold">Works with <br> {{ providers|length }}+ AI providers</p>
+                    <div class="infiniteSlide_tech_main d-grid">
+                        <div class="infiniteSlide infiniteSlide_partner" data-clone="3">
+                            {% for p in providers %}<span class="provider-chip fw-semibold">{{ p }}</span>{% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro process(pad_top=true) %}
+<div class="section-process flat-spacing {% if not pad_top %}pt-0{% endif %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="process-heading h-100">
+                    <div class="heading-section mb-80">
+                        <div class="heading-sub fw-semibold effectFade fadeUp">How it works</div>
+                        <div class="heading-title text-gradient-3 effectFade fadeRotateX">From Question <br> to Next Steps</div>
+                    </div>
+                    <div class="group-btn-slider">
+                        <div class="nav-prev-swiper"><i class="icon icon-angle-left-solid"></i></div>
+                        <div class="nav-next-swiper"><i class="icon icon-angle-right-solid"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="process-slide">
+                    <div dir="ltr" class="swiper tf-swiper swiper-box-shadow" data-preview="1.78" data-tablet="2" data-mobile-sm="1" data-mobile="1"
+                        data-loop="false" data-center="false" data-space-lg="24" data-space-md="24" data-space="30">
+                        <div class="swiper-wrapper">
+                            {% for icon, title, text, time in [
+                                ("icon-comments-solid", "Describe your situation", "Tell it what happened, where and when, in your own words and your own language. It asks follow-up questions when key facts are missing.", "1 MINUTE"),
+                                ("icon-paperclip-solid", "Attach your documents", "Add the notice, agreement, FIR or court order you received as a PDF, Word file or photo, and it reads it for you.", "OPTIONAL"),
+                                ("icon-check-solid", "Get clear next steps", "Get the relevant law in plain words, your options, deadlines to watch, and drafts like a legal notice you can review.", "INSTANT"),
+                            ] %}
+                            <div class="swiper-slide">
+                                <div class="process-card">
+                                    <i class="icon {{ icon }}"></i>
+                                    <div class="content">
+                                        <h4 class="title fw-semibold">{{ title }}</h4>
+                                        <p class="text text-secondary">{{ text }}</p>
+                                    </div>
+                                    <div class="bot">
+                                        <div class="time fw-semibold">{{ time }}</div>
+                                        <div class="number">
+                                            <span class="text-neutral-400">0{{ loop.index }}</span>
+                                            <span class="text-neutral-200">/03</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro pricing() %}
+<div id="pricing" class="section-pricing flat-spacing">
+    <div class="container">
+        <div class="heading-section mb-80">
+            <div class="heading-sub fw-semibold effectFade fadeUp">AI Engines</div>
+            <div class="heading-title text-gradient-3 effectFade fadeRotateX">
+                Start free, <br> upgrade the engine <br> when you need to.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 lg-mb-24">
+                <div class="pricing-item h-100 effectFade fadeRotateX">
+                    <div class="top d-flex gap-12 align-items-center">
+                        <div class="d-flex gap-8 align-items-center">
+                            <i class="icon icon-user-friends-solid fs-24"></i>
+                            <div class="fw-semibold text">Free engines</div>
+                        </div>
+                        <div class="line"></div>
+                        <div class="fw-semibold text-secondary">For everyone</div>
+                    </div>
+                    <div class="heading">
+                        <div class="d-flex gap-14 align-items-end">
+                            <div class="price-value fw-bold">₹0</div>
+                            <h6 class="price-per">/ free tier</h6>
+                        </div>
+                        <a href="/chat" class="tf-btn">Ask the AI</a>
+                    </div>
+                    <div class="line"></div>
+                    <div class="content">
+                        <div>
+                            <div class="title fw-semibold mb-4">Included</div>
+                            <div class="text fw-semibold">Use a free plan from a supported provider. Good for everyday questions, within the provider's daily limits.</div>
+                        </div>
+                        <ul class="list-text type-check">
+                            <li><i class="icon icon-check-solid"></i> Groq, Google Gemini, OpenRouter free models</li>
+                            <li><i class="icon icon-check-solid"></i> Ollama on your own computer</li>
+                            <li><i class="icon icon-check-solid"></i> Documents, datasets and 10 languages</li>
+                            <li><i class="icon icon-check-solid"></i> Chats saved in your browser</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="pricing-item h-100 style-black effectFade fadeRotateX" data-delay="0.1">
+                    <div class="top d-flex gap-12 align-items-center">
+                        <div class="d-flex gap-8 align-items-center">
+                            <i class="icon icon-building fs-24"></i>
+                            <div class="fw-semibold text">Premium engines</div>
+                        </div>
+                        <div class="line"></div>
+                        <div class="fw-semibold text-neutral-400">For detailed work</div>
+                    </div>
+                    <div class="heading">
+                        <div class="d-flex gap-14 align-items-end">
+                            <div class="price-value fw-bold">Pay</div>
+                            <h6 class="price-per">/ per use</h6>
+                        </div>
+                        <a href="/app" class="tf-btn">Open settings</a>
+                    </div>
+                    <div class="line"></div>
+                    <div class="content">
+                        <div>
+                            <div class="title fw-semibold mb-4">Included</div>
+                            <div class="text fw-semibold">Add your own API key for a stronger model. You pay the provider directly for what you use.</div>
+                        </div>
+                        <ul class="list-text type-check">
+                            <li><i class="icon icon-check-solid"></i> Everything in Free</li>
+                            <li><i class="icon icon-check-solid"></i> Anthropic Claude, OpenAI, DeepSeek, xAI</li>
+                            <li><i class="icon icon-check-solid"></i> Web search for current law (Claude)</li>
+                            <li><i class="icon icon-check-solid"></i> Keys stay on your server</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro faq_section(faqs, pad_top=false, prefix="faq") %}
+<div class="section-faqs flat-spacing {% if not pad_top %}pt-0{% endif %}">
+    <div class="container">
+        <div class="heading-section center mb-64">
+            <div class="heading-sub fw-semibold effectFade fadeUp">FAQs</div>
+            <div class="heading-title text-gradient-3 effectFade fadeRotateX">Frequently Asked <br>Questions</div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="accordion-asked" id="accordion-{{ prefix }}">
+                    {% for q, a in faqs %}
+                    <div class="accordion-asked-item effectFade fadeRotateX" data-delay="{{ (loop.index0 % 4) / 10 }}">
+                        <div class="accordion-asked-title" id="{{ prefix }}-q{{ loop.index }}">
+                            <button class="accordion-button text-body-1 fw-semibold {% if not loop.first %}collapsed{% endif %}" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#{{ prefix }}-a{{ loop.index }}"
+                                aria-expanded="{{ 'true' if loop.first else 'false' }}" aria-controls="{{ prefix }}-a{{ loop.index }}">
+                                {{ q }}
+                                <span class="right-icon"></span>
+                            </button>
+                        </div>
+                        <div id="{{ prefix }}-a{{ loop.index }}" role="region" class="accordion-collapse collapse {% if loop.first %}show{% endif %}"
+                            aria-labelledby="{{ prefix }}-q{{ loop.index }}" data-bs-parent="#accordion-{{ prefix }}">
+                            <div class="accordion-body">{{ a }}</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro contact_form(extra_class="") %}
+<form class="form-contact js-contact-form {{ extra_class }} effectFade fadeUp" novalidate>
+    <h4 class="heading fw-semibold">Send us a message</h4>
+    <fieldset class="mb-21">
+        <label class="fw-semibold text-body-3 mb-20" for="cf-name-{{ extra_class|replace(' ', '') }}">Your name</label>
+        <input id="cf-name-{{ extra_class|replace(' ', '') }}" name="name" type="text" placeholder="Enter your full name" required maxlength="120">
+    </fieldset>
+    <fieldset class="mb-21">
+        <label class="fw-semibold text-body-3 mb-20" for="cf-email-{{ extra_class|replace(' ', '') }}">Your email or phone</label>
+        <input id="cf-email-{{ extra_class|replace(' ', '') }}" name="contact" type="text" placeholder="How can we reach you?" required maxlength="160">
+    </fieldset>
+    <fieldset class="mb-18">
+        <label class="fw-semibold text-body-3 mb-0" for="cf-msg-{{ extra_class|replace(' ', '') }}">Your message</label>
+        <textarea id="cf-msg-{{ extra_class|replace(' ', '') }}" name="message" required maxlength="4000" placeholder="Feedback, a bug, or a question about the website. For legal questions, use the chat."></textarea>
+    </fieldset>
+    <p class="form-status text-body-3" role="status"></p>
+    <button type="submit" class="tf-btn w-100">Submit Message</button>
+</form>
+{% endmacro %}
+
+{% macro contact_section() %}
+<div id="contact" class="flat-spacing pt-0">
+    <div class="section-contact">
+        <div class="contact-image">
+            <img src="/assets/images/legal/contact-bg.svg?v={{ v }}" alt="">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="col-left">
+                        <div class="heading-section mb-48">
+                            <div class="heading-sub fw-semibold effectFade fadeUp">Contact</div>
+                            <div class="heading-title text-gradient-3 effectFade fadeRotateX">Need Help <br> Right Now?</div>
+                        </div>
+                        <div>
+                            <a href="/chat" class="contact-item mb-20 effectFade fadeRotateX">
+                                <i class="icon icon-comments-solid"></i>
+                                <span class="content">
+                                    <span class="title fw-semibold mb-2 d-block">Ask the AI</span>
+                                    <span class="text d-block">Get answers in your language, any time</span>
+                                </span>
+                            </a>
+                            <a href="tel:15100" class="contact-item effectFade fadeRotateX" data-delay="0.1">
+                                <i class="icon icon-headset-solid"></i>
+                                <span class="content">
+                                    <span class="title fw-semibold mb-2 d-block">Free legal aid in India</span>
+                                    <span class="text d-block">NALSA helpline 15100</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    {{ contact_form("home") }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro statistic(stats, quote) %}
+<div class="section-statistic">
+    <div class="line"></div>
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-md-6">
+                <div class="heading-section mb-48">
+                    <div class="heading-sub fw-semibold style-1 effectFade fadeUp">By the numbers</div>
+                    <div class="heading-title text-white effectFade fadeRotateX">Legal help <br> that's always <br> available</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="statistic-slider">
+                    <div class="text text-body-1 text-neutral-400 effectFade fadeUp">{{ quote }}</div>
+                    <div class="swiper swiper-progressbar">
+                        <div class="group-slider effectFade fadeUp">
+                            <div class="progress-bar"><div class="progress-fill" id="progressBar"></div></div>
+                            <div class="group-btn-slider">
+                                <div class="btn-slider progressbar-prev"><i class="icon icon-angle-left-solid"></i></div>
+                                <div class="btn-slider progressbar-next"><i class="icon icon-angle-right-solid"></i></div>
+                            </div>
+                        </div>
+                        <div class="swiper-wrapper effectFade fadeUp">
+                            {% for s in stats %}
+                            <div class="swiper-slide">
+                                <div class="title fw-semibold text-body-1">{{ s.label }}</div>
+                                <div class="statistic-number">
+                                    <span class="number text-white fw-semibold">{{ s.number }}</span>
+                                    <span class="prefix text-brand">{{ s.suffix }}</span>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro questions_people_ask(areas, cases) %}
+<div class="section-testimonials flat-spacing pt-0">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-5">
+                <div class="col-left">
+                    <div class="heading-section mb-48">
+                        <div class="heading-sub fw-semibold style-1 effectFade fadeUp">Ask anything</div>
+                        <div class="heading-title text-white effectFade fadeRotateX">Questions <br> People Ask</div>
+                    </div>
+                    <div class="swiper-testimonial_wrap effectFade fadeUp">
+                        <div dir="ltr" class="swiper tf-swiper swiper-testimonial">
+                            <div class="swiper-wrapper">
+                                {% for a in areas[:4] %}
+                                <div class="swiper-slide">
+                                    <div>
+                                        <div class="top-icon">
+                                            <svg width="23" height="20" viewBox="0 0 23 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                <path d="M12.9375 20V10.3597C12.9375 7.72182 13.824 5.51559 15.5969 3.74101C17.4177 1.91847 19.8854 0.671463 23 0V6.40288C21.8021 6.78657 21.0115 7.26619 20.6281 7.84173C20.2448 8.3693 20.0292 9.04077 19.9813 9.85612H23V20H12.9375ZM0 20V10.3597C0 7.72182 0.886459 5.51559 2.65938 3.74101C4.48021 1.91847 6.94792 0.671463 10.0625 0V6.40288C8.9125 6.78657 8.12187 7.26619 7.69062 7.84173C7.30729 8.3693 7.09167 9.04077 7.04375 9.85612H10.0625V20H0Z" fill="#FD3A25"/>
+                                            </svg>
+                                        </div>
+                                        <div class="text-body-1 text-white desc">{{ a.questions[0] }}</div>
+                                        <div class="cite">
+                                            <img class="line-left" src="/assets/images/legal/line-1.svg?v={{ v }}" alt="">
+                                            <a href="/chat?q={{ a.questions[0]|urlencode }}" class="name text-body-3 text-neutral-400 fw-semibold link1">Ask this</a>
+                                            <div class="line"></div>
+                                            <div class="sub text-body-3 text-neutral-400">{{ a.title }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="group-slider">
+                            <div class="group-btn-slider">
+                                <div class="btn-slider nav-prev-swiper testimonials-prev"><i class="icon icon-angle-left-solid"></i></div>
+                                <div class="btn-slider nav-next-swiper testimonials-next"><i class="icon icon-angle-right-solid"></i></div>
+                            </div>
+                            <div class="testimonials-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div dir="ltr" class="swiper sw-main-image effectFade fadeUp">
+                    <div class="swiper-wrapper">
+                        {% for a in areas[:4] %}
+                        <div class="swiper-slide">
+                            <div class="testimonial-image"><img src="/assets/images/legal/{{ a.image }}?v={{ v }}" alt=""></div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro box_black_open() %}
+<div class="box-black">
+    <div class="light-box"></div>
+    <img class="light-top" src="/assets/images/legal/light-top.svg?v={{ v }}" alt="">
+    <img class="light-bot" src="/assets/images/legal/light-bot.svg?v={{ v }}" alt="">
+{% endmacro %}

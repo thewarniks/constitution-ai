@@ -1,0 +1,17 @@
+<svg width="746" height="437" viewBox="0 0 746 437" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(373.0 437) scale(462.52 393.3)">
+<stop stop-color="#FD3A25" stop-opacity=".55"/><stop offset=".55" stop-color="#FD3A25" stop-opacity=".12"/><stop offset="1" stop-color="#FD3A25" stop-opacity="0"/></radialGradient>
+<linearGradient id="fade" x1="0" y1="109.25" x2="0" y2="437" gradientUnits="userSpaceOnUse"><stop stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".9"/></linearGradient>
+<mask id="m"><rect width="746" height="437" fill="url(#fade)"/></mask>
+<clipPath id="c"><circle cx="373.0" cy="697" r="600"/></clipPath>
+</defs>
+<rect width="746" height="437" fill="url(#glow)"/>
+<g mask="url(#m)">
+<circle cx="373.0" cy="697" r="600" fill="#ffffff" fill-opacity=".04" stroke="#ffffff" stroke-opacity=".55" stroke-width="1.5"/>
+<g clip-path="url(#c)" stroke="#ffffff" stroke-opacity=".22" stroke-width="1"><ellipse cx="373.0" cy="697" rx="585.0" ry="600" /><ellipse cx="373.0" cy="697" rx="540.6" ry="600" /><ellipse cx="373.0" cy="697" rx="469.1" ry="600" /><ellipse cx="373.0" cy="697" rx="374.1" ry="600" /><ellipse cx="373.0" cy="697" rx="260.3" ry="600" /><ellipse cx="373.0" cy="697" rx="133.5" ry="600" /><ellipse cx="373.0" cy="697" rx="0.5" ry="600" /><ellipse cx="373.0" cy="697" rx="133.5" ry="600" /><ellipse cx="373.0" cy="697" rx="260.3" ry="600" /><ellipse cx="373.0" cy="697" rx="374.1" ry="600" /><ellipse cx="373.0" cy="697" rx="469.1" ry="600" /><ellipse cx="373.0" cy="697" rx="540.6" ry="600" /><ellipse cx="373.0" cy="697" rx="585.0" ry="600" /><line x1="255.9" y1="108.5" x2="490.1" y2="108.5" /><line x1="143.4" y1="142.7" x2="602.6" y2="142.7" /><line x1="39.7" y1="198.1" x2="706.3" y2="198.1" /><line x1="-51.3" y1="272.7" x2="797.3" y2="272.7" /><line x1="-125.9" y1="363.7" x2="871.9" y2="363.7" /><line x1="-181.3" y1="467.4" x2="927.3" y2="467.4" /></g>
+<circle cx="223.0" cy="167" r="5" fill="#FD3A25"/>
+<circle cx="493.0" cy="137" r="4" fill="#ffffff"/>
+<circle cx="413.0" cy="217" r="4" fill="#FD3A25"/>
+</g>
+</svg>

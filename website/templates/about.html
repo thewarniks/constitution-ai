@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+{% block title %}About – {{ site.name }}{% endblock %}
+{% block body_class %}counter-scroll{% endblock %}
+
+{% block content %}
+{{ m.page_hero("Constitution Ai", "Explained", "An AI assistant that explains legal problems in plain language, so more people can understand their rights and take the right next step.", ("scale", "doc", "globe")) }}
+
+<div class="section-about-us flat-spacing" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="heading-section">
+                    <div class="heading-sub fw-semibold effectFade fadeUp">About Us</div>
+                    <div class="heading-title text-gradient-2 effectFade fadeRotateX">Making the Law <br> Easier to Understand</div>
+                </div>
+            </div>
+            <div class="col-xxl-7 col-lg-6 lg-mb-24">
+                <div class="col-left">
+                    <div class="position-relative z-5">
+                        <div class="sub text-white"><span class="dot"></span> Free to start</div>
+                        <h5 class="title fw-semibold text-white">Answers in <span class="text-brand">{{ languages|length }} languages</span></h5>
+                        <a href="/chat" class="tf-btn">Ask a Question</a>
+                    </div>
+                    <img class="effectFade fadeRotateX" src="/assets/images/legal/earth.svg?v={{ v }}" alt="">
+                </div>
+            </div>
+            <div class="col-xxl-5 col-lg-6">
+                <div class="mission-box mb-24">
+                    <h4 class="title fw-semibold effectFade fadeUp">Our Mission</h4>
+                    <div class="line"></div>
+                    <p class="text effectFade fadeUp">
+                        Most people meet the legal system at a stressful moment: a notice from a landlord, a refund that never came, a police station that won't listen. Constitution Ai exists to make that first step less confusing. It explains the law in plain words, shows the options and deadlines, and helps draft the letters people need, while being honest that it is not a lawyer and pointing to free legal aid and professional help when it matters.
+                    </p>
+                </div>
+                <div class="box-quotes effectFade fadeRotateX">
+                    <div class="image"><img src="/assets/images/legal/quote.svg?v={{ v }}" alt=""></div>
+                    <div class="content">
+                        <div class="icon mb-8">
+                            <svg width="23" height="20" viewBox="0 0 23 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M12.9375 20V10.3597C12.9375 7.72182 13.824 5.51559 15.5969 3.74101C17.4177 1.91847 19.8854 0.671463 23 0V6.40288C21.8021 6.78657 21.0115 7.26619 20.6281 7.84173C20.2448 8.3693 20.0292 9.04077 19.9813 9.85612H23V20H12.9375ZM0 20V10.3597C0 7.72182 0.886459 5.51559 2.65938 3.74101C4.48021 1.91847 6.94792 0.671463 10.0625 0V6.40288C8.9125 6.78657 8.12187 7.26619 7.69062 7.84173C7.30729 8.3693 7.09167 9.04077 7.04375 9.85612H10.0625V20H0Z" fill="#E4E4E7"/>
+                            </svg>
+                        </div>
+                        <div class="text-body-1 fw-semibold desc">No citizen should be denied justice because of economic or other disabilities.</div>
+                        <div class="cite">
+                            <div class="name text-body-3 fw-semibold">Article 39A</div>
+                            <div class="line"></div>
+                            <div class="sub text-body-3">Constitution of India (paraphrased)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ m.partner_strip(providers) }}
+
+<div class="box-white">
+    <div class="section-features flat-spacing">
+        <div class="container">
+            <div class="heading-section center mb-64">
+                <div class="heading-sub fw-semibold effectFade fadeUp">Principles</div>
+                <div class="heading-title text-gradient-3 effectFade fadeRotateX">How We Build It</div>
+            </div>
+        </div>
+        <div class="position-relative">
+            <div class="container z-5">
+                <div class="features-wrap justify-content-between">
+                    <div class="features-col col-left lg-mb-24">
+                        <div class="features-item effectFade fadeUp">
+                            <i class="icon icon-comments-solid"></i>
+                            <h6 class="title fw-semibold">Plain Language First</h6>
+                            <p class="text-secondary">If a 15-year-old can't follow the answer, it isn't finished. Jargon is explained, not assumed.</p>
+                        </div>
+                        <div class="features-item effectFade fadeUp">
+                            <i class="icon icon-clipboard-check-solid"></i>
+                            <h6 class="title fw-semibold">Honest About Limits</h6>
+                            <p class="text-secondary">It never invents case citations, says when the law is unclear, and recommends a lawyer for serious matters.</p>
+                        </div>
+                        <div class="features-item effectFade fadeUp">
+                            <i class="icon icon-book-solid"></i>
+                            <h6 class="title fw-semibold">Current Law</h6>
+                            <p class="text-secondary">Instructions are kept up to date with major changes, like India's move to the BNS, BNSS and BSA in 2024.</p>
+                        </div>
+                    </div>
+                    <div class="features-center flex-shrink">
+                        <img src="/assets/images/logo/mark-white.svg?v={{ v }}" alt="">
+                    </div>
+                    <div class="features-col col-right">
+                        <div class="features-item effectFade fadeUp" data-delay="0.1">
+                            <i class="icon icon-shield-alt-solid"></i>
+                            <h6 class="title fw-semibold">Privacy Respected</h6>
+                            <p class="text-secondary">Chats are stored in your browser, not on our server, and API keys never reach the page.</p>
+                        </div>
+                        <div class="features-item effectFade fadeUp" data-delay="0.1">
+                            <i class="icon icon-user-friends-solid"></i>
+                            <h6 class="title fw-semibold">Access for Everyone</h6>
+                            <p class="text-secondary">Free AI engines, ten languages, voice input, and links to free legal aid when you need a real lawyer.</p>
+                        </div>
+                        <div class="features-item effectFade fadeUp" data-delay="0.1">
+                            <i class="icon icon-plug-solid"></i>
+                            <h6 class="title fw-semibold">Open by Design</h6>
+                            <p class="text-secondary">Bring your own AI provider and your own reference documents. Nothing is locked to one vendor.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="side-line-main d-none d-lg-block wow fadeIn">
+                <div class="container"><div class="row"><div class="col-lg-4 mx-auto"><div class="side-line-wrap">
+                    <div class="link-break-line left"><div class="link-break-line"><span class="item top"></span><span class="item bottom"></span></div></div>
+                    <div class="link-break-center"><span class="simu-electric left"></span><span class="simu-electric right"></span></div>
+                    <div class="link-break-line right"><span class="item top"></span><span class="item bottom"></span></div>
+                </div></div></div></div>
+            </div>
+        </div>
+    </div>
+    {{ m.process(pad_top=false) }}
+</div>
+
+<div class="box-black">
+    <div class="light-box"></div>
+    <img class="light-top" src="/assets/images/legal/light-top.svg?v={{ v }}" alt="">
+    <img class="light-bot" src="/assets/images/legal/light-bot.svg?v={{ v }}" alt="">
+    {{ m.statistic(stats, "Built to be there at the moment a legal question comes up, in the language you think in.") }}
+    <div class="pt-5"></div>
+    {{ m.questions_people_ask(areas, cases) }}
+</div>
+
+{{ m.faq_section(faqs, pad_top=true) }}
+{{ m.contact_section() }}
+{% endblock %}

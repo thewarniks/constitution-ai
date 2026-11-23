@@ -1,0 +1,21 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+<defs>
+<radialGradient id="bg" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(720.0 450.0) scale(1200.0 800.0)">
+<stop stop-color="#fbfbfb"/><stop offset=".7" stop-color="#ececee"/><stop offset="1" stop-color="#dcdce0"/></radialGradient>
+
+<linearGradient id="rib" x1="720.0" y1="0" x2="1600" y2="1000" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FF7A5C"/><stop offset=".45" stop-color="#FD3A25"/><stop offset=".8" stop-color="#3a3a3f"/><stop offset="1" stop-color="#3a3a3f"/></linearGradient>
+<linearGradient id="rib2" x1="0" y1="1000" x2="800.0" y2="0" gradientUnits="userSpaceOnUse">
+<stop stop-color="#9a9aa2" stop-opacity=".0"/><stop offset=".5" stop-color="#9a9aa2" stop-opacity=".55"/><stop offset="1" stop-color="#d4d4d8" stop-opacity="0"/></linearGradient>
+<filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="35.0"/></filter>
+<filter id="softer" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="80.0"/></filter>
+
+</defs>
+<rect width="1600" height="1000" fill="url(#bg)"/>
+
+<path d="M927.9999999999999 -100.0 C1248.0 250.0 992.0 550.0 1440.0 1100.0" stroke="url(#rib)" stroke-width="340" stroke-linecap="round" filter="url(#soft)"/>
+<path d="M1056.0 -50.0 C1312.0 250.0 1120.0 600.0 1520.0 1050.0" stroke="#ffffff" stroke-opacity=".35" stroke-width="30" stroke-linecap="round" filter="url(#soft)"/>
+<path d="M-80.0 900.0 C240.0 500.0 320.0 250.0 640.0 -50.0" stroke="url(#rib2)" stroke-width="220" stroke-linecap="round" filter="url(#softer)"/>
+
+<rect width="1600" height="1000" fill="#ffffff" fill-opacity=".08"/>
+</svg>

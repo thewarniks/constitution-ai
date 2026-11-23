@@ -1,0 +1,17 @@
+{
+    "chatbotStore": {
+        "apiKey": "",
+        "url": "http://localhost:11434",
+        "path": "/v1/chat/completions",
+        "model": "llama3.2",
+        "max_tokens_value": ""
+    },
+    "defaultChoiceStore": {
+        "model": [
+            "llama3.2"
+        ]
+    },
+    "title": "Ollama (free, runs on this PC)",
+    "modelsUrl": "http://localhost:11434/v1/models",
+    "keyRequired": false
+}
